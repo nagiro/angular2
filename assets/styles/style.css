@@ -1,0 +1,8 @@
+.displayHead {
+    color:blue;
+    transition: 2s ease all;
+}
+.userName {
+    color:red;
+    transition: 2s ease all;
+}
