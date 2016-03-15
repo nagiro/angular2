@@ -1,8 +1,8 @@
 .displayHead {
     color:blue;
-    transition: 2s ease all;
+    text-align: center;
 }
 .userName {
     color:red;
-    transition: 2s ease all;
+    text-align: center;
 }
