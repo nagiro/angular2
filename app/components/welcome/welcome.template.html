@@ -1,7 +1,0 @@
-<h1 class="displayHead" *ngIf="!!displayName">Welcome to the world of Angular 2</h1>
-<h2 class="userName" [hidden]="!displayName">{{displayName}}</h2>
-<div *ngIf="!displayName">
-    <label>Enter Your Name</label>
-    <input [(ngModel)]="name"/>
-    <button (click)="setDisplayName(name)">Enter</button>
-</div>
