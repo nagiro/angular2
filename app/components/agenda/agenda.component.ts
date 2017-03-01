@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'agenda-component',
-    templateUrl: './agenda.template.html'
+    templateUrl: 'app/components/agenda/agenda.template.html'
 })
 export class AgendaComponent {
     constructor() {
