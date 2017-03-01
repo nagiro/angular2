@@ -13,6 +13,6 @@
     "typeRoots": ["./node_modules/@types"],
     "compileOnSave": true
   },
-  "include": ["**/*"],
+  "include": ["**/*", "app/components/agenda/*", "app/components/helpers/*"],
   "exclude": ["node_modules","**/*.spec.ts"]
 }

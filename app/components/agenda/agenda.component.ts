@@ -9,13 +9,10 @@ export class AgendaComponent {
         var selfAgenda = this;
         
     }
-    setDisplayName(value: String){
-        var selfAgenda = this;
-        
+
+    alertMe(value: Boolean){
+        alert('Hail to the king babe');
     }
-    setDisplayName2(value: String){
-        var selfAgenda = this;
-        
-    }
+
 }
 //# sourceMappingURL=agenda.component.js.map
