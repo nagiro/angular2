@@ -12,25 +12,17 @@
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Cicle</label> </div>
 				    <div class="col-xs-10"> 
-				    	<ng-select 
-				    		[allowClear]="true" 
-				    		[items]="items"
-				    		[disabled]="disabled"
-				    		(data)="refreshValue($event)"
-              				(selected)="selected($event)"
-              				(removed)="removed($event)"
-              				(typed)="typed($event)"
-              				placeholder="Escull un cicle">
-  						</ng-select> 
+				    	<single-select [placeholder]="'Escull un cicle'"></single-select>
   					</div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Format</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder=""> </div>
+				    <div class="col-xs-10"> <single-select [placeholder]="'Escull un format'"></single-select>
+				  </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Estat</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder=""> </div>
+				    <div class="col-xs-10"> <single-select [placeholder]="'Escull un estat'"></single-select> </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Organitzador</label> </div>
@@ -42,7 +34,7 @@
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Avisar hospici?</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder=""> </div>
+				    <div class="col-xs-10"> <single-select [defaultValue]='[{"id":0, "text": "No"}]'></single-select> </div>
 				  </div>				  
 				  <button type="submit" class="btn btn-success">Guarda l'activitat</button>
 				  <button type="submit" class="btn btn-warning">Esborra l'activitat</button>

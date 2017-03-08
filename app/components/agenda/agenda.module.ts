@@ -1,21 +1,29 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AgendaComponent } from './agenda.component.js';
+import { NgModule }            from '@angular/core';
+import { HttpModule }          from '@angular/http';
 
-import { TooltipModule } from 'ng2-bootstrap';
-import { TabsModule } from 'ng2-bootstrap';
+import { BrowserModule }       from '@angular/platform-browser';
+import { AgendaComponent }     from './agenda.component.js';
 
-import {SelectModule} from 'ng2-select';
+import { TooltipModule }       from 'ng2-bootstrap';
+import { TabsModule }          from 'ng2-bootstrap';
+
+import {SelectModule}          from 'ng2-select';
+import {SelectHelperComponent} from '../helpers/SelectHelperComponent';
 
 @NgModule({
+  
+  declarations: [ 
+            AgendaComponent,
+            SelectHelperComponent
+          ],
   imports:      [ 
-  					BrowserModule, 
+  					BrowserModule,
+            HttpModule,
   					TooltipModule.forRoot(),
   					TabsModule.forRoot(),
-  					SelectModule
+  					SelectModule            
   				],
-  providers:    [ ],
-  declarations: [ AgendaComponent ],
+  providers:    [ ],  
   exports:      [ AgendaComponent ],
   bootstrap:    [ AgendaComponent ]
 })

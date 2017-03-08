@@ -11,8 +11,12 @@
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["es5", "dom"],    
     "typeRoots": ["./node_modules/@types"],
-    "compileOnSave": true
+    "compileOnSave": true    
   },
-  "include": ["**/*", "app/components/agenda/*", "app/components/helpers/*"],
-  "exclude": ["node_modules","**/*.spec.ts"]
+  "filesGlob": [
+        "./app/**/*.component.ts",        
+        "./app/**/*.module.ts",
+        "!./app/node_modules/**/*.ts"
+    ]
+
 }

@@ -1,25 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
  
 @Component({
   selector: 'single-select',
-  templateUrl: './single-demo.html'
+  templateUrl: 'app/components/helpers/SingleSelectHelper.template.html'
 })
 export class SelectHelperComponent {
-  public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
-    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
-    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
-    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
-    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
-    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
-    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
-    'Zagreb', 'Zaragoza', 'Łódź'];
- 
+  
+  @Input() public placeholder: String; 
+  @Input() public defaultValue: Number = 0;
+
+  public items: Array<any> = [{"id":"1", "text": "Cicle1"}, {"id":"0", "text": "Cicle0"}];
   private value:any = {};
   private _disabledV:string = '0';
-  private disabled:boolean = false;
- 
+  private disabled:boolean = false; 
+
   private get disabledV():string {
     return this._disabledV;
   }

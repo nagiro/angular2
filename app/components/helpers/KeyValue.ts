@@ -2,7 +2,7 @@ export class KeyValueClass {
   key: number;
   value: string;
 
-  constructor() {
+  constructor(key: Number, value: String) {
         var selfAgenda = this;        
     }
 
