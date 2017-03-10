@@ -1,20 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { CiclesSelectModel } from '../models/Cicles.model';
 
 @Injectable()
 export class AgendaDataService{
 
-	private baseUrl: string = 'http://www.casadecultura.eu/ajax/cicles/getCicles';
+	@Input() private URL: string = 'http://www.casadecultura.eu/ajax/cicles/getCicles';
 
 	constructor(private http : Http){}	
 
-  	getCicles(): Observable<JSON> {
-  		let Cicles = this.http.get(
-  			`${this.baseUrl}`, {}
-  			).map(mapCicles);
-  		return Cicles;
+  	getCiclesSelect(): Observable<CiclesSelectModel> {  
+  		let tmp : any;
+  		let tmp1 = this.http.get( this.URL, {} );  		
+  		let tmp2 = tmp1.map(res => res = res.json());
+  		let tmp3 = tmp2.map(this.toCicleSelect);
+  							
+  		let Cicles = tmp3;		
+//  							.catch(this.handleError);
+  		return Cicles;  		
   	};
+
+  	private toCicleSelect(response: string):CiclesSelectModel{
+  		let r = JSON.parse(response);  		
+  		return new CiclesSelectModel(r.cicles);
+  	}
+
+  	private handleError(err: any, caught: any):any[]{
+  		return [];
+  	}
 
 
   /*
@@ -35,14 +49,7 @@ export class AgendaDataService{
 }
 
 
-  	function mapCicles(response: Response): JSON{
-  		return response.json().map(toCicleSelect);
-  	}
-
-  	function toCicleSelect(r:any){
-  		let cicle = JSON;
-  		return '{"id":"'+r.CicleID+'", "text":"'+r.Nom+'"}'; 
-  	}
+  	
 
 /*
   	function mapPersons(response:Response): Person[]{

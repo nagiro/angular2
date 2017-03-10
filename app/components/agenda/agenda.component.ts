@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SelectHelperComponent} from '../helpers/SelectHelperComponent';
 import { AgendaDataService } from '../helpers/AgendaData.service';
+import { CiclesSelectModel } from '../models/Cicles.model';
 
 @Component({
     selector: 'agenda-component',
@@ -8,14 +9,14 @@ import { AgendaDataService } from '../helpers/AgendaData.service';
     providers: [AgendaDataService]
 })
 export class AgendaComponent implements OnInit {
-    public cicles: JSON;
+    public cicles: CiclesSelectModel;
     public data: any;  
     private errorMessage: string = '';
   	private isLoading: boolean = true;  
 
-    constructor(private ADS: AgendaDataService) {
-        var selfAgenda = this;                
-        this.ADS.getCicles().subscribe(val => this.cicles = JSON.stringify(val));
+    constructor(private ADS: AgendaDataService) {        
+        this.ADS.getCiclesSelect().subscribe(val => this.cicles = val);
+        console.log(this.cicles);
     }    
 
     ngOnInit(){

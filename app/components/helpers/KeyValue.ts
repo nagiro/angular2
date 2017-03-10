@@ -2,8 +2,9 @@ export class KeyValueClass {
   key: number;
   value: string;
 
-  constructor(key: Number, value: String) {
-        var selfAgenda = this;        
+  constructor(key: number, value: string) {
+        this.key = key; 
+        this.value = value; 
     }
 
 }
