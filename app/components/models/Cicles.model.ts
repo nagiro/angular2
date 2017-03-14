@@ -1,7 +1,7 @@
 import { KeyValueClass } from '../helpers/KeyValue';
 
 export class CiclesModel {
-    CicleId: number;
+    CicleID: number;
     Nom: string; 
     Imatge: string;
     PDF: string; 
@@ -18,28 +18,17 @@ export class CiclesModel {
 
 export class CiclesSelectModel {
     //El llistat és un array amb un ID i una descripció
-    llistat: Array<[number,string]>;
+    CicleID: number; 
+    Nom: string; 
+    id: number;
+    text: string;
 
     // El puc construir a partir d'un JSON
-    constructor (response: string) {
-    	let r = JSON.parse(response);
-
-    	console.log(r);
-    }   
-
-    public getSelect():Array<[number,string]>{
-    	return this.llistat;
-    }
-
-    public getSelectJSON():string{
-    	for(let c of this.llistat){
-
-    	}
-    	return "";
-    }
-
-    private ConvertInput(input: CiclesModel):[number,string]{    	        
-    	return [ input.CicleId, input.Nom ];
-    }
+   	constructor (Cicle: CiclesModel) {
+   		this.CicleID = Cicle.CicleID;
+   		this.Nom = Cicle.Nom;
+   		this.id = Cicle.CicleID;
+   		this.text = Cicle.Nom;
+   	}           
 
 }

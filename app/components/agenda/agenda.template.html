@@ -9,15 +9,21 @@
 				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>
 				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder="Nom de l'activitat"> </div>
 				  </div>
+				  <div>				  				  				 
+				  	<ul>
+   						<li *ngFor="let item of CiclesSelect">{{item.CicleID}}. {{item.Nom}}</li>
+					</ul>
+				  </div>
+				  
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Cicle</label> </div>
-				    <div class="col-xs-10"> 
+				    <div class="col-xs-10"> 				    
 				    	<single-select [placeholder]="'Escull un cicle'"></single-select>
   					</div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Format</label> </div>
-				    <div class="col-xs-10"> <single-select [placeholder]="'Escull un format'"></single-select>
+				    <div class="col-xs-10"> <single-select items="CiclesSelect" [placeholder]="'Escull un format'"></single-select>
 				  </div>
 				  </div>
 				  <div class="form-group">

@@ -8,8 +8,8 @@ export class SelectHelperComponent {
   
   @Input() public placeholder: String; 
   @Input() public defaultValue: Number = 0;
+  @Input() public items: Array<any>;
 
-  public items: Array<any> = [{"id":"1", "text": "Cicle1"}, {"id":"0", "text": "Cicle0"}];
   private value:any = {};
   private _disabledV:string = '0';
   private disabled:boolean = false; 
