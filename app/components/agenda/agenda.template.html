@@ -18,12 +18,12 @@
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Cicle</label> </div>
 				    <div class="col-xs-10"> 				    
-				    	<single-select [placeholder]="'Escull un cicle'"></single-select>
+				    	<single-select [items]="CiclesSelect" [placeholder]="'Escull un cicle'"></single-select>
   					</div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Format</label> </div>
-				    <div class="col-xs-10"> <single-select items="CiclesSelect" [placeholder]="'Escull un format'"></single-select>
+				    <div class="col-xs-10"> <single-select [items]="FormatsSelect" [placeholder]="'Escull un format'"></single-select>
 				  </div>
 				  </div>
 				  <div class="form-group">

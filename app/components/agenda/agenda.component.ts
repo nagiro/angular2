@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import { HttpService } from '../helpers/httpService';
+import { Response } from '@angular/http';
 
-import { Injectable, Input } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-
-import {SelectHelperComponent} from '../helpers/SelectHelperComponent';
+import { SelectHelperComponent } from '../helpers/SelectHelperComponent';
 import { CiclesSelectModel } from '../models/Cicles.model';
+import { TipusSelectModel } from '../models/Tipus.model';
+import { TipusModel } from '../models/Tipus.model';
 import { CiclesModel } from '../models/Cicles.model';
 
 
@@ -13,41 +13,58 @@ import { CiclesModel } from '../models/Cicles.model';
 @Component({
     selector: 'agenda-component',
     templateUrl: 'app/components/agenda/agenda.template.html',
-    providers: []
+    providers: [HttpService]
 })
 export class AgendaComponent implements OnInit {          
 
-	public CiclesSelect: CiclesSelectModel[];
+	//Entrem el SiteID per saber què carreguem
+	@Input() public SiteID: number = 1;
 
-    constructor( private http : Http ) {        
+	public CiclesSelect: CiclesSelectModel[];
+	public FormatsSelect: TipusSelectModel[];
+
+    constructor( private http : HttpService ) {        
 		this.getCiclesToSelectFromServer();
+		this.getFormatsToSelectFromServer();
     }    
 
     /**
     * Funció que retorna els cicles per a un select
     **/
     public getCiclesToSelectFromServer(){
-
-    	this.http.get( 'http://www.casadecultura.eu/ajax/cicles/getCicles', {} )    					
-  						.subscribe( (res: Response) => this.CiclesSelect = this.convertToCiclesSelect(<CiclesModel[]>res.json()) , 
-  									this.ShowError ); 		
-				  			
+    	let url = 'http://www.casadecultura.eu/ajax/agenda/getCicles'; 
+    	let parm = {idS: this.SiteID};
+    	this.http.post( url , parm ).subscribe( this.getCiclesToSelectFromServerOK, this.ShowError );
+    	
+    }
+    public getCiclesToSelectFromServerOK( res: Response ){    	
+    	let data1:CiclesModel[] = res.json();
+    	let data2:CiclesSelectModel[] = data1.map( val => val.toSelect() );
+    	this.CiclesSelect = data2;
     }
 
-    private convertToCiclesSelect(LlistatCicles: CiclesModel[]):CiclesSelectModel[]{    	
-    	        	
-    	var LlistatSelectCicles: CiclesSelectModel[] = [];
 
-    	for (let Cicle of LlistatCicles) {    		
-    		LlistatSelectCicles.push( new CiclesSelectModel(Cicle));    		
-		}    	 
+    /**
+    * Funció que retorna els formats per a un select
+    **/
+    public getFormatsToSelectFromServer(){
+    	let url = 'http://www.casadecultura.eu/ajax/agenda/getFormats'; 
+    	let parm = { idS: this.SiteID, tipusNom: "form_act" };    	
+    	this.http.post( url , parm ).subscribe( this.getFormatsToSelectFromServerOK, this.ShowError );				  			
+    }
+    public getFormatsToSelectFromServerOK( res: Response ){    	
+    	let data1:TipusModel[] = res.json();
+    	let data2:TipusSelectModel[] = data1.map( val => val.toSelect() );    	    	
+    	this.FormatsSelect = data2;
+    }
+    
 
-		return LlistatSelectCicles;
+    private ShowError( E: Response){
+    	console.log("Error (" + E.json().code + "): " + E.json().message );
     }
 
-    private ShowError(Error: Response){
 
-    }
+
 
 
     ngOnInit(){}

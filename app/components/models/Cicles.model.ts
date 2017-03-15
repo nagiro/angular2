@@ -1,4 +1,5 @@
 import { KeyValueClass } from '../helpers/KeyValue';
+import { SelectHelperInterface } from '../helpers/SelectHelperComponent';
 
 export class CiclesModel {
     CicleID: number;
@@ -14,9 +15,13 @@ export class CiclesModel {
     Visibleweb: number; 
     site_id: number; 
     actiu: number;
+
+    public toSelect(): CiclesSelectModel { return new CiclesSelectModel( this ); }
+
 }
 
-export class CiclesSelectModel {
+
+export class CiclesSelectModel implements SelectHelperInterface {
     //El llistat és un array amb un ID i una descripció
     CicleID: number; 
     Nom: string; 

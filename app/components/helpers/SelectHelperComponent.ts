@@ -8,7 +8,11 @@ export class SelectHelperComponent {
   
   @Input() public placeholder: String; 
   @Input() public defaultValue: Number = 0;
-  @Input() public items: Array<any>;
+  @Input() public items: Array<SelectHelperInterface> = [];
+
+  constructor(){
+    console.log(this.items);
+  }
 
   private value:any = {};
   private _disabledV:string = '0';
@@ -37,5 +41,12 @@ export class SelectHelperComponent {
  
   public refreshValue(value:any):void {
     this.value = value;
-  }
+  } 
+
+}
+
+
+export interface SelectHelperInterface {
+    id: number;
+    text: string;
 }
