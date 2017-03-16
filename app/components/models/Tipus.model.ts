@@ -1,5 +1,6 @@
 import { KeyValueClass } from '../helpers/KeyValue';
 import { SelectHelperInterface } from '../helpers/SelectHelperComponent';
+import { Response } from '@angular/http';
 
 export class TipusModel {
     idTipus: number;
@@ -23,6 +24,29 @@ export class TipusSelectModel implements SelectHelperInterface {
    		this.text = Tipus.tipusDesc;
    	}              
 
+
+
+}
+
+/**
+* Quan rebo una resposta del php. 
+**/
+export class TipusArray {
+  Llistat: TipusModel[] = [];
+  LlistatSelect: TipusSelectModel[] = [];
+
+  constructor( Llistat: Response){
+    this.Llistat = Llistat.json();    
+  }
+
+  public getLlistatSelect():TipusSelectModel[] {    
+    for( let tmp of this.Llistat ) this.LlistatSelect.push( new TipusSelectModel(tmp) );    
+    return this.LlistatSelect;
+  }
+
+  public getLlistat(): TipusModel[]{
+    return this.Llistat;
+  }
 
 
 }

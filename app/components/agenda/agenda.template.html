@@ -8,10 +8,12 @@
 				  <div class="form-group">
 				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>
 				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder="Nom de l'activitat"> </div>
-				  </div>
-				  <div>				  				  				 
+				  </div>				  
+				  <div>	
+				  {{CiclesSelect}}				  
+				  {{FormatsSelect}}				  			  				  				 
 				  	<ul>
-   						<li *ngFor="let item of CiclesSelect">{{item.CicleID}}. {{item.Nom}}</li>
+   						
 					</ul>
 				  </div>
 				  
