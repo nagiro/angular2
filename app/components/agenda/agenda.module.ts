@@ -1,5 +1,6 @@
 import { NgModule }            from '@angular/core';
 import { HttpModule }          from '@angular/http';
+import { FormsModule }         from '@angular/forms';
 
 import { BrowserModule }       from '@angular/platform-browser';
 import { AgendaComponent }     from './agenda.component.js';
@@ -21,7 +22,8 @@ import {SelectHelperComponent} from '../helpers/SelectHelperComponent';
             HttpModule,
   					TooltipModule.forRoot(),
   					TabsModule.forRoot(),
-  					SelectModule            
+  					SelectModule,
+            FormsModule
   				],
   providers:    [ ],  
   exports:      [ AgendaComponent ],

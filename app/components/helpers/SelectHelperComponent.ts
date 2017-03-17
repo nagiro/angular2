@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
  
 @Component({
   selector: 'single-select',
@@ -9,6 +9,7 @@ export class SelectHelperComponent {
   @Input() public placeholder: String; 
   @Input() public defaultValue: Number = 0;
   @Input() public items: SelectHelperInterface[] = [];
+  @Output() public onChangeValue: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(){
     
@@ -16,7 +17,7 @@ export class SelectHelperComponent {
 
   private value:any = {};
   private _disabledV:string = '0';
-  private disabled:boolean = false; 
+  private disabled:boolean = false;   
 
   private get disabledV():string {
     return this._disabledV;
@@ -27,9 +28,10 @@ export class SelectHelperComponent {
     this.disabled = this._disabledV === '1';
   }
  
-  public selected(value:any):void {
+  public selected(value:any) {
     console.log('Selected value is: ', value);
-  }
+    this.onChangeValue.emit(value.id);
+  }  
  
   public removed(value:any):void {
     console.log('Removed value is: ', value);

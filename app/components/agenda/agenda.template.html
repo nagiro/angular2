@@ -1,57 +1,88 @@
 
   	<tabset>
-	  <tab heading="Dades generals">
-	  	<div class="container-fluid">
+	  <tab heading="Dades generals" [disabled]="Tabs[0]">
+	  	<div class="container-fluid">  			
   			<div class="row"> <br /> </div>
-  			<div class="row">  			
-  				<form  class="form-horizontal">
+  			<div class="row">  	  			
+  				<form  class="form-horizontal" (ngSubmit)="onSubmitActivitatGeneral()" #heroForm="ngForm">
 				  <div class="form-group">
-				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder="Nom de l'activitat"> </div>
-				  </div>				  
-				  <div>	
-				  {{CiclesSelect}}				  
-				  {{FormatsSelect}}				  			  				  				 
-				  	<ul>
-   						
-					</ul>
-				  </div>
-				  
-				  <div class="form-group">
+				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>					  	
+				    <div class="col-xs-10">					    
+				    	<input 	type="text" 
+				    			class="form-control" 					    							    
+				    			[value]="Activitat.Nom"
+				    			(input) = "Activitat.setNom($event.target.value)"
+				    	> 
+				    </div>
+				  </div>				  				  
+				  <div class="form-group">					  
 				    <div class="col-xs-2"> <label for="" class="control-label">Cicle</label> </div>
 				    <div class="col-xs-10"> 				    
-				    	<single-select [items]="CiclesSelect" [placeholder]="'Escull un cicle'"></single-select>
+				    	<single-select 
+				    		(onChangeValue)="Activitat.setCicle($event)" 
+				    		[items]="CiclesSelect" 
+				    		[placeholder]="'Escull un cicle'"
+				    	></single-select>
   					</div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Format</label> </div>
-				    <div class="col-xs-10"> <single-select [items]="FormatsSelect" [placeholder]="'Escull un format'"></single-select>
+				    <div class="col-xs-10"> 
+				    	<single-select 
+				    		(onChangeValue)="Activitat.setFormat($event)" 
+				    		[items]="FormatsSelect" 
+				    		[placeholder]="'Escull un format'">				    		
+				    	</single-select>
 				  </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Estat</label> </div>
-				    <div class="col-xs-10"> <single-select [placeholder]="'Escull un estat'"></single-select> </div>
+				    <div class="col-xs-10"> 
+				    	<single-select 
+				    		(onChangeValue)="Activitat.setEstat($event)" 
+				    		[items]="[{'id':1,'text':'Acceptada'},{'id':2,'text':'Pre reservada'}]"
+				    		[placeholder]="'Escull un estat'">				    		
+				    	</single-select> 
+				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Organitzador</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder=""> </div>
+				    <div class="col-xs-10"> 
+				    	<input 	type="text" 
+				    			class="form-control" 
+				    			[value]="Activitat.Organitzador"
+				    			(input) = "Activitat.setOrganitzador($event.target.value)"    			
+				    	> 
+				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Responsable</label> </div>
-				    <div class="col-xs-10"> <input type="text" class="form-control" id="" placeholder=""> </div>
+				    <div class="col-xs-10">
+				    	<input 	type="text" 
+				    			class="form-control" 
+				    			[value]="Activitat.Responsable"
+				    			(input) = "Activitat.setResponsable($event.target.value)"
+				    	> 
+				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Avisar hospici?</label> </div>
-				    <div class="col-xs-10"> <single-select [defaultValue]='[{"id":0, "text": "No"}]'></single-select> </div>
+				    <div class="col-xs-10"> 
+				    	<single-select 
+				    		(onChangeValue)="Activitat.setAvisarHospici($event)" 
+				    		[items]="[{'id':1,'text':'Sí'},{'id':0,'text':'No'}]"
+				    		[defaultValue]='[{"id":0, "text": "No"}]'>					    		
+				    	</single-select> 
+				    </div>
 				  </div>				  
 				  <button type="submit" class="btn btn-success">Guarda l'activitat</button>
-				  <button type="submit" class="btn btn-warning">Esborra l'activitat</button>
+				  <button type="button" class="btn btn-warning">Esborra l'activitat</button>
 				</form>
-  			</div>
+  			</div>	  		
   		</div>	    	  	
 	  </tab>
-	  <tab heading="Horaris"></tab>
-	  <tab heading="Descripció">
+	  <tab heading="Horaris" [disabled]="Tabs[1]"></tab>
+	  <tab heading="Descripció" [disabled]="Tabs[2]">
 	  	<div class="container-fluid">
   			<div class="row">
   			</div>
