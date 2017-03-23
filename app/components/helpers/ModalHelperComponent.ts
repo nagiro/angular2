@@ -1,5 +1,6 @@
 import { ModalDirective } from 'ng2-bootstrap';
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
  
 @Component({
   selector: 'resposta-web-modal',
@@ -7,10 +8,19 @@ import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core
 })
 export class ModalHelperComponent {
 	
-	//@Input() public Missatge:EventEmitter<string> = new EventEmitter<string>();	
-	@ViewChild('autoShownModal') public autoShownModal:ModalDirective;
+	@Input() public eventMissatge:Subject<string>;
+	@ViewChild('autoShownModal') public autoShownModal:ModalDirective;	
 
 	public isModalShown:boolean = true;	
+
+	ngOnInit(){
+		//Vinculem a una entrada d'info de l'objecte
+		this.eventMissatge.subscribe(event => { console.log(event.toString()); } );		
+	}
+
+	ngOnDestroy() {   
+    	this.eventMissatge.unsubscribe();
+  	}
 
 	public showModal(){
 		//console.log(this.Missatge);
@@ -19,9 +29,6 @@ export class ModalHelperComponent {
 	public hideModal(){
 		this.isModalShown = false;
 	}
-
-	public handleMissatgeEvent(E){
-		console.log(E);
-	}
+	
 
 }

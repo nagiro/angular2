@@ -5,7 +5,7 @@
   			<div class="row">  	  			
   				<form  class="form-horizontal" (ngSubmit)="onSubmitActivitatGeneral()" #heroForm="ngForm">
 
-  				  <resposta-web-modal (Missatge)="handleMissatgeEvent($event)" (showModal)="Missatge" ></resposta-web-modal>
+  				  <resposta-web-modal [eventMissatge]="eventMissatge" (showModal)="Missatge" ></resposta-web-modal>
 
 				  <div class="form-group">
 				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>					  	

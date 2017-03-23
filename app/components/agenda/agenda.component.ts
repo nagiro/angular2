@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../helpers/httpService';
 import { Response } from '@angular/http';
+import { Subject } from 'rxjs/Subject';
 
 import { TipusModel, TipusSelectModel, TipusArray } from '../models/Tipus.model';
 import { CiclesSelectModel, CiclesModel, CiclesArray } from '../models/Cicles.model';
@@ -27,22 +28,22 @@ export class AgendaComponent implements OnInit {
     public Horaris: HorarisModel; 
 
     public Tabs: boolean[];
-    @Output() public Missatge: EventEmitter<string> = new EventEmitter();  
+    public eventMissatge: Subject<string> = new Subject();  
 
     public CiclesSelect: CiclesSelectModel[];
 	public FormatsSelect: TipusSelectModel[];    
     public EstatsSelect: TipusSelectModel[];    
 
-
-   
-
     constructor( private http : HttpService ) {        		
         this.Tabs = [false, true, true];
         this.getCiclesToSelectFromServer();        
 		this.getFormatsToSelectFromServer();
-        this.Activitat = new ActivitatsModel();
-        this.Missatge.emit("Això és un missatge que envio");        
+        this.Activitat = new ActivitatsModel();                
     }    
+    
+    ngOnInit(){
+        
+    }
 
     public setCicle($event: EventEmitter<number>){
         console.log($event);
@@ -51,7 +52,7 @@ export class AgendaComponent implements OnInit {
     /**
     * Funció que retorna els cicles per a un select
     **/
-    public getCiclesToSelectFromServer(){
+    public getCiclesToSelectFromServer(){        
     	let url = this.burl + '/agenda/getCicles'; 
     	let parm = { idS: this.SiteID };
         this.http.post( url , parm ).subscribe( (r:Response) => this.getRes1(r), this.ShowError );     	
@@ -75,20 +76,21 @@ export class AgendaComponent implements OnInit {
     /**
     * Guardem l'activitat en si
     **/
-    public onSubmitActivitatGeneral(){        
+    public onSubmitActivitatGeneral(){           
+        this.eventMissatge.next("Això és un missatge que envio");     
         let url = this.burl + '/agenda/saveActivitat'; 
         let parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
+        /*
         this.http.post( url , parm ).subscribe( 
             (r:Response) => this.Missatge.emit(r.json()),
             (r:Response) => this.Missatge.emit(r.json()) );                   
+        */
     }
 
     private ShowError( E: Response){
     	console.log("Error (" + E.json().code + "): " + E.json().message );
     }
 
-
-    ngOnInit(){}
 
 }
 //# sourceMappingURL=agenda.component.js.map
