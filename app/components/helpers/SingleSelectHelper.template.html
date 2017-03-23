@@ -1,4 +1,4 @@
-<ng-select [allowClear]="true"
+<ng-select    [allowClear]="true"
               [items]="items"
               [disabled]="disabled"
               (data)="refreshValue($event)"
@@ -7,5 +7,7 @@
               (typed)="typed($event)"
               [placeholder]="placeholder"
               [active]="defaultValue"              
+              [multiple]="false"
               >
+
 </ng-select>

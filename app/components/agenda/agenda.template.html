@@ -1,10 +1,12 @@
-
   	<tabset>
 	  <tab heading="Dades generals" [disabled]="Tabs[0]">
 	  	<div class="container-fluid">  			
   			<div class="row"> <br /> </div>
   			<div class="row">  	  			
   				<form  class="form-horizontal" (ngSubmit)="onSubmitActivitatGeneral()" #heroForm="ngForm">
+
+  				  <resposta-web-modal (Missatge)="handleMissatgeEvent($event)" (showModal)="Missatge" ></resposta-web-modal>
+
 				  <div class="form-group">
 				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>					  	
 				    <div class="col-xs-10">					    
@@ -68,11 +70,10 @@
 				  <div class="form-group">
 				    <div class="col-xs-2"> <label for="" class="control-label">Avisar hospici?</label> </div>
 				    <div class="col-xs-10"> 
-				    	<single-select 
-				    		(onChangeValue)="Activitat.setAvisarHospici($event)" 
-				    		[items]="[{'id':1,'text':'Sí'},{'id':0,'text':'No'}]"
-				    		[defaultValue]='[{"id":0, "text": "No"}]'>					    		
-				    	</single-select> 
+				    	<single-sino-select
+				    		(onChangeValue)="Activitat.setAvisarHospici($event)"
+				    		>
+				    	</single-sino-select> 
 				    </div>
 				  </div>				  
 				  <button type="submit" class="btn btn-success">Guarda l'activitat</button>

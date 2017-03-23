@@ -5,23 +5,28 @@ import { FormsModule }         from '@angular/forms';
 import { BrowserModule }       from '@angular/platform-browser';
 import { AgendaComponent }     from './agenda.component.js';
 
-import { TooltipModule }       from 'ng2-bootstrap';
-import { TabsModule }          from 'ng2-bootstrap';
+import { TooltipModule, TabsModule, ModalModule }       from 'ng2-bootstrap';
 
 import {SelectModule}          from 'ng2-select';
-import {SelectHelperComponent} from '../helpers/SelectHelperComponent';
+import {SelectHelperComponent, SiNoSelectHelper } from '../helpers/SelectHelperComponent';
+import { ModalHelperComponent } from '../helpers/ModalHelperComponent';
+
+
 
 @NgModule({
   
   declarations: [ 
             AgendaComponent,
-            SelectHelperComponent
+            SelectHelperComponent,
+            SiNoSelectHelper,
+            ModalHelperComponent
           ],
   imports:      [ 
   					BrowserModule,
             HttpModule,
   					TooltipModule.forRoot(),
   					TabsModule.forRoot(),
+            ModalModule.forRoot(),
   					SelectModule,
             FormsModule
   				],

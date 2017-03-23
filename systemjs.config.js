@@ -8,8 +8,8 @@
     var map = {
         'app': 'app',
         'rxjs': 'node_modules/rxjs',
-        '@angular': 'node_modules/@angular'
-
+        '@angular': 'node_modules/@angular',
+        'ng2-bootstrap': 'node_modules/ng2-bootstrap'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension

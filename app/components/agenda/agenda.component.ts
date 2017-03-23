@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../helpers/httpService';
 import { Response } from '@angular/http';
 
@@ -7,7 +7,8 @@ import { CiclesSelectModel, CiclesModel, CiclesArray } from '../models/Cicles.mo
 import { ActivitatsSelectModel, ActivitatsModel, ActivitatsArray } from '../models/Activitats.model';
 import { HorarisSelectModel, HorarisModel, HorarisArray } from '../models/Horaris.model';
 
-import { SelectHelperComponent } from '../helpers/SelectHelperComponent';
+import { SelectHelperComponent, SiNoSelectHelper } from '../helpers/SelectHelperComponent';
+import { ModalHelperComponent } from '../helpers/ModalHelperComponent';
 
 
 @Component({
@@ -26,10 +27,13 @@ export class AgendaComponent implements OnInit {
     public Horaris: HorarisModel; 
 
     public Tabs: boolean[];
+    @Output() public Missatge: EventEmitter<string> = new EventEmitter();  
 
     public CiclesSelect: CiclesSelectModel[];
 	public FormatsSelect: TipusSelectModel[];    
     public EstatsSelect: TipusSelectModel[];    
+
+
    
 
     constructor( private http : HttpService ) {        		
@@ -37,6 +41,7 @@ export class AgendaComponent implements OnInit {
         this.getCiclesToSelectFromServer();        
 		this.getFormatsToSelectFromServer();
         this.Activitat = new ActivitatsModel();
+        this.Missatge.emit("Això és un missatge que envio");        
     }    
 
     public setCicle($event: EventEmitter<number>){
@@ -60,7 +65,7 @@ export class AgendaComponent implements OnInit {
     **/
     public getFormatsToSelectFromServer(){
     	let url = this.burl + '/agenda/getFormats'; 
-    	let parm = { idS: this.SiteID, tipusNom: "form_act" };    	
+    	let parm = { idS: this.SiteID, tipusNom: "form_act" };
     	this.http.post( url , parm ).subscribe( 
             (r:Response) => this.FormatsSelect = new TipusArray(r).getLlistatSelect(),
             this.ShowError );		        
@@ -70,12 +75,12 @@ export class AgendaComponent implements OnInit {
     /**
     * Guardem l'activitat en si
     **/
-    public onSubmitActivitatGeneral(){
+    public onSubmitActivitatGeneral(){        
         let url = this.burl + '/agenda/saveActivitat'; 
-        let parm = { Activitat: this.Activitat, tipus: 1 };
+        let parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
         this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.FormatsSelect = new TipusArray(r).getLlistatSelect(),
-            this.ShowError );                   
+            (r:Response) => this.Missatge.emit(r.json()),
+            (r:Response) => this.Missatge.emit(r.json()) );                   
     }
 
     private ShowError( E: Response){

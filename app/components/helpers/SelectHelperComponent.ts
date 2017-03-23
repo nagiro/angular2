@@ -1,18 +1,45 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
  
+export interface SelectHelperInterface {
+    id: number;
+    text: string;
+}
+
+
+/**
+* Classe per crear un element d'una llista
+**/
+export class SelectValue implements SelectHelperInterface{
+    id: number;
+    text: string;
+
+    // Entro un id i un text
+    constructor (key: number, text: string) {       
+       this.id = key;
+       this.text = text;
+     }           
+
+}
+
+/**
+* COMPONENT PER CREAR UNA LLISTA DE SELECCIÓ SENZILLA
+**/
 @Component({
   selector: 'single-select',
   templateUrl: 'app/components/helpers/SingleSelectHelper.template.html'
 })
 export class SelectHelperComponent {
   
-  @Input() public placeholder: String; 
-  @Input() public defaultValue: Number = 0;
+  @Input() public placeholder: String = ""; 
+  @Input() public defaultValue: Array<SelectValue> = [];
   @Input() public items: SelectHelperInterface[] = [];
   @Output() public onChangeValue: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(){
-    
+  constructor(){      
+    let E = new SelectValue(0,"---");    
+    this.items.push(E);
+    this.defaultValue.push(E);
+    console.log(this.defaultValue);
   }
 
   private value:any = {};
@@ -48,7 +75,21 @@ export class SelectHelperComponent {
 }
 
 
-export interface SelectHelperInterface {
-    id: number;
-    text: string;
+
+/**
+* COMPONENT PER CREAR UNA LLISTA DE SI I NO
+**/
+@Component({
+  selector: 'single-sino-select',
+  templateUrl: 'app/components/helpers/SingleSelectHelper.template.html'
+})
+export class SiNoSelectHelper extends SelectHelperComponent {
+
+  constructor(){
+    super();        
+    this.items.push(new SelectValue(2,"No"));
+    this.items.push(new SelectValue(1,"Sí"));
+    this.defaultValue = [new SelectValue(2,"No")];    
+  }
+  
 }

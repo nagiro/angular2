@@ -24,8 +24,6 @@ export class TipusSelectModel implements SelectHelperInterface {
    		this.text = Tipus.tipusDesc;
    	}              
 
-
-
 }
 
 /**
