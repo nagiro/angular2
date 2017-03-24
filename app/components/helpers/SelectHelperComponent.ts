@@ -39,7 +39,6 @@ export class SelectHelperComponent {
     let E = new SelectValue(0,"---");    
     this.items.push(E);
     this.defaultValue.push(E);
-    console.log(this.defaultValue);
   }
 
   private value:any = {};

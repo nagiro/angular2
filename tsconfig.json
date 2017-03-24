@@ -4,6 +4,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
+    "watch": true,
+    "outDir": "build",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [ "es2015", "dom" ],
@@ -11,6 +13,9 @@
     "suppressImplicitAnyIndexErrors": true,
     "typeRoots": ["./node_modules/@types"]
   },
+  "exclude": [
+    "node_modules"
+  ],
     "filesGlob": [
         "./app/**/*.component.ts",        
         "./app/**/*.module.ts",

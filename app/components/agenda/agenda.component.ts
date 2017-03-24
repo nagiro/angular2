@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../helpers/httpService';
 import { Response } from '@angular/http';
-import { Subject } from 'rxjs/Subject';
 
 import { TipusModel, TipusSelectModel, TipusArray } from '../models/Tipus.model';
 import { CiclesSelectModel, CiclesModel, CiclesArray } from '../models/Cicles.model';
@@ -10,6 +9,7 @@ import { HorarisSelectModel, HorarisModel, HorarisArray } from '../models/Horari
 
 import { SelectHelperComponent, SiNoSelectHelper } from '../helpers/SelectHelperComponent';
 import { ModalHelperComponent } from '../helpers/ModalHelperComponent';
+import { ErrorEmitter, ErrorList, ErrorModel } from '../helpers/AuxiliarObjects';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class AgendaComponent implements OnInit {
     public Horaris: HorarisModel; 
 
     public Tabs: boolean[];
-    public eventMissatge: Subject<string> = new Subject();  
+    public E: ErrorEmitter = new ErrorEmitter();  
 
     public CiclesSelect: CiclesSelectModel[];
 	public FormatsSelect: TipusSelectModel[];    
@@ -38,15 +38,11 @@ export class AgendaComponent implements OnInit {
         this.Tabs = [false, true, true];
         this.getCiclesToSelectFromServer();        
 		this.getFormatsToSelectFromServer();
-        this.Activitat = new ActivitatsModel();                
+        this.Activitat = new ActivitatsModel();                        
     }    
     
     ngOnInit(){
         
-    }
-
-    public setCicle($event: EventEmitter<number>){
-        console.log($event);
     }
 
     /**
@@ -76,15 +72,14 @@ export class AgendaComponent implements OnInit {
     /**
     * Guardem l'activitat en si
     **/
-    public onSubmitActivitatGeneral(){           
-        this.eventMissatge.next("Això és un missatge que envio");     
+    public onSubmitActivitatGeneral(){                   
+        
         let url = this.burl + '/agenda/saveActivitat'; 
         let parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
-        /*
+        
         this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.Missatge.emit(r.json()),
-            (r:Response) => this.Missatge.emit(r.json()) );                   
-        */
+            (r:Response) => this.E.throwError(new ErrorList( r.json() ) ),
+            (r:Response) => this.E.throwError(new ErrorList( r.json() ) ));
     }
 
     private ShowError( E: Response){
