@@ -21,7 +21,7 @@ var AgendaComponent = (function () {
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
         this.burl = "http://www.casadecultura.eu/ajax";
-        this.E = new AuxiliarObjects_1.ErrorEmitter();
+        this.E = new AuxiliarObjects_1.MessageEmitter();
         this.Tabs = [false, true, true];
         this.getCiclesToSelectFromServer();
         this.getFormatsToSelectFromServer();
@@ -36,7 +36,7 @@ var AgendaComponent = (function () {
         var _this = this;
         var url = this.burl + '/agenda/getCicles';
         var parm = { idS: this.SiteID };
-        this.http.post(url, parm).subscribe(function (r) { return _this.getRes1(r); }, this.ShowError);
+        this.http.post(url, parm).subscribe(function (r) { return _this.getRes1(r); }, function (r) { return _this.E.throwError(new AuxiliarObjects_1.MessageList(r.json())); });
     };
     AgendaComponent.prototype.getRes1 = function (res) {
         this.CiclesSelect = new Cicles_model_1.CiclesArray(res).getLlistatSelect();
@@ -48,7 +48,7 @@ var AgendaComponent = (function () {
         var _this = this;
         var url = this.burl + '/agenda/getFormats';
         var parm = { idS: this.SiteID, tipusNom: "form_act" };
-        this.http.post(url, parm).subscribe(function (r) { return _this.FormatsSelect = new Tipus_model_1.TipusArray(r).getLlistatSelect(); }, this.ShowError);
+        this.http.post(url, parm).subscribe(function (r) { return _this.FormatsSelect = new Tipus_model_1.TipusArray(r).getLlistatSelect(); }, function (r) { return _this.E.throwError(new AuxiliarObjects_1.MessageList(r.json())); });
     };
     /**
     * Guardem l'activitat en si
@@ -57,10 +57,7 @@ var AgendaComponent = (function () {
         var _this = this;
         var url = this.burl + '/agenda/saveActivitat';
         var parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
-        this.http.post(url, parm).subscribe(function (r) { return _this.E.throwError(new AuxiliarObjects_1.ErrorList(r.json())); }, function (r) { return _this.E.throwError(new AuxiliarObjects_1.ErrorList(r.json())); });
-    };
-    AgendaComponent.prototype.ShowError = function (E) {
-        console.log("Error (" + E.json().code + "): " + E.json().message);
+        this.http.post(url, parm).subscribe(function (r) { return _this.E.throwSuccess(new AuxiliarObjects_1.MessageList(r.json())); }, function (r) { return _this.E.throwError(new AuxiliarObjects_1.MessageList(r.json())); });
     };
     return AgendaComponent;
 }());

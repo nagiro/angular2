@@ -9,7 +9,7 @@ import { HorarisSelectModel, HorarisModel, HorarisArray } from '../models/Horari
 
 import { SelectHelperComponent, SiNoSelectHelper } from '../helpers/SelectHelperComponent';
 import { ModalHelperComponent } from '../helpers/ModalHelperComponent';
-import { ErrorEmitter, ErrorList, ErrorModel } from '../helpers/AuxiliarObjects';
+import { MessageEmitter, MessageList, MessageModel } from '../helpers/AuxiliarObjects';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class AgendaComponent implements OnInit {
     public Horaris: HorarisModel; 
 
     public Tabs: boolean[];
-    public E: ErrorEmitter = new ErrorEmitter();  
+    public E: MessageEmitter = new MessageEmitter();  
 
     public CiclesSelect: CiclesSelectModel[];
 	public FormatsSelect: TipusSelectModel[];    
@@ -51,7 +51,9 @@ export class AgendaComponent implements OnInit {
     public getCiclesToSelectFromServer(){        
     	let url = this.burl + '/agenda/getCicles'; 
     	let parm = { idS: this.SiteID };
-        this.http.post( url , parm ).subscribe( (r:Response) => this.getRes1(r), this.ShowError );     	
+        this.http.post( url , parm ).subscribe( 
+            (r:Response) => this.getRes1(r), 
+            (r:Response) => this.E.throwError( new MessageList( <MessageModel[]> r.json() ) ) );
     }
     public getRes1(res: Response){        
         this.CiclesSelect = new CiclesArray(res).getLlistatSelect();                
@@ -65,7 +67,7 @@ export class AgendaComponent implements OnInit {
     	let parm = { idS: this.SiteID, tipusNom: "form_act" };
     	this.http.post( url , parm ).subscribe( 
             (r:Response) => this.FormatsSelect = new TipusArray(r).getLlistatSelect(),
-            this.ShowError );		        
+            (r:Response) => this.E.throwError( new MessageList( <MessageModel[]> r.json() ) ) );
     }
 
 
@@ -78,14 +80,9 @@ export class AgendaComponent implements OnInit {
         let parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
         
         this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.E.throwError(new ErrorList( r.json() ) ),
-            (r:Response) => this.E.throwError(new ErrorList( r.json() ) ));
+            (r:Response) => this.E.throwSuccess(new MessageList( <MessageModel[]> r.json() ) ),
+            (r:Response) => this.E.throwError(new MessageList( <MessageModel[]> r.json() ) ));
     }
-
-    private ShowError( E: Response){
-    	console.log("Error (" + E.json().code + "): " + E.json().message );
-    }
-
 
 }
 //# sourceMappingURL=agenda.component.js.map

@@ -1,6 +1,6 @@
 import { ModalDirective } from 'ng2-bootstrap';
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
-import { ErrorEmitter, ErrorList, ErrorModel } from './AuxiliarObjects';
+import { MessageEmitter, MessageList, MessageModel } from './AuxiliarObjects';
  
 @Component({
   selector: 'resposta-web-modal',
@@ -8,7 +8,7 @@ import { ErrorEmitter, ErrorList, ErrorModel } from './AuxiliarObjects';
 })
 export class ModalHelperComponent {
 	
-	@Input() public E:ErrorEmitter = new ErrorEmitter();
+	@Input() public E:MessageEmitter = new MessageEmitter();
 	@ViewChild('autoShownModal') public autoShownModal:ModalDirective;	
 	public text: string = "";
 
@@ -16,16 +16,15 @@ export class ModalHelperComponent {
 
 	ngOnInit(){
 		//Vinculem a una entrada d'info de l'objecte
-		this.E.ErrorEmitter.subscribe( event => { this.showModalError( <ErrorList>event ); } );		
+		this.E.MessageEmitter.subscribe( event => { this.showModalMessage( <MessageList>event ); } );		
 	}
 
 	ngOnDestroy() {
-    	this.E.ErrorEmitter.unsubscribe();
+    	this.E.MessageEmitter.unsubscribe();
   	}
 
-	public showModalError( E: ErrorList ){
-		this.text = E.LlistatErrors.toString();		
-		console.log(E);
+	public showModalMessage( E: MessageList ){
+		//this.text = E.LlistatMessages;		
 		this.autoShownModal.show();		
 	}
 	

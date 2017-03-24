@@ -1,40 +1,50 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Subject_1 = require("rxjs/Subject");
-var ErrorEmitter = (function () {
-    function ErrorEmitter() {
-        this.ErrorEmitter = new Subject_1.Subject();
+var MessageEmitter = (function () {
+    function MessageEmitter() {
+        this.MessageEmitter = new Subject_1.Subject();
     }
-    ErrorEmitter.prototype.throwError = function (E) {
+    MessageEmitter.prototype.throwError = function (E) {
         E.tipus = E.CONST_DANGER;
-        this.ErrorEmitter.next(E);
+        this.MessageEmitter.next(E);
     };
-    ErrorEmitter.prototype.throwSuccess = function (E) {
+    MessageEmitter.prototype.throwSuccess = function (E) {
         E.tipus = E.CONST_SUCCESS;
-        this.ErrorEmitter.next(E);
+        this.MessageEmitter.next(E);
     };
-    return ErrorEmitter;
+    return MessageEmitter;
 }());
-exports.ErrorEmitter = ErrorEmitter;
-var ErrorList = (function () {
+exports.MessageEmitter = MessageEmitter;
+var MessageList = (function () {
     //Entra un objecte json 
-    function ErrorList(json) {
-        this.LlistatErrors = [];
+    function MessageList(MM) {
+        this.LlistatMessages = [];
         this.CONST_DANGER = 0;
         this.CONST_SUCCESS = 1;
         this.CONST_WARNING = 2;
         this.tipus = this.CONST_WARNING;
+        if (MM instanceof String) {
+            MM = new Array();
+            MM.push(new MessageModel(0, MM, MM.toString()));
+            console.log(MM.toString());
+        }
+        else if (MM instanceof Array) {
+        }
     }
-    return ErrorList;
+    return MessageList;
 }());
-exports.ErrorList = ErrorList;
-var ErrorModel = (function () {
-    function ErrorModel(id, text, description) {
+exports.MessageList = MessageList;
+var MessageModel = (function () {
+    function MessageModel(id, text, description) {
+        this.id = 0;
+        this.text = "";
+        this.description = "";
         this.id = id;
         this.text = text;
         this.description = description;
     }
-    return ErrorModel;
+    return MessageModel;
 }());
-exports.ErrorModel = ErrorModel;
+exports.MessageModel = MessageModel;
 //# sourceMappingURL=AuxiliarObjects.js.map

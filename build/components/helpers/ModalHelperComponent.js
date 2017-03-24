@@ -14,21 +14,20 @@ var core_1 = require("@angular/core");
 var AuxiliarObjects_1 = require("./AuxiliarObjects");
 var ModalHelperComponent = (function () {
     function ModalHelperComponent() {
-        this.E = new AuxiliarObjects_1.ErrorEmitter();
+        this.E = new AuxiliarObjects_1.MessageEmitter();
         this.text = "";
         this.isModalShown = true;
     }
     ModalHelperComponent.prototype.ngOnInit = function () {
         var _this = this;
         //Vinculem a una entrada d'info de l'objecte
-        this.E.ErrorEmitter.subscribe(function (event) { _this.showModalError(event); });
+        this.E.MessageEmitter.subscribe(function (event) { _this.showModalMessage(event); });
     };
     ModalHelperComponent.prototype.ngOnDestroy = function () {
-        this.E.ErrorEmitter.unsubscribe();
+        this.E.MessageEmitter.unsubscribe();
     };
-    ModalHelperComponent.prototype.showModalError = function (E) {
-        this.text = E.LlistatErrors.toString();
-        console.log(E);
+    ModalHelperComponent.prototype.showModalMessage = function (E) {
+        //this.text = E.LlistatMessages;		
         this.autoShownModal.show();
     };
     ModalHelperComponent.prototype.hideModal = function () {
@@ -38,7 +37,7 @@ var ModalHelperComponent = (function () {
 }());
 __decorate([
     core_1.Input(),
-    __metadata("design:type", AuxiliarObjects_1.ErrorEmitter)
+    __metadata("design:type", AuxiliarObjects_1.MessageEmitter)
 ], ModalHelperComponent.prototype, "E", void 0);
 __decorate([
     core_1.ViewChild('autoShownModal'),

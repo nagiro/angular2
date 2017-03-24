@@ -1,42 +1,51 @@
 import { Subject } from 'rxjs/Subject';
 
-export class ErrorEmitter {
+export class MessageEmitter {
 	
-	public ErrorEmitter: Subject<ErrorList> = new Subject();  
+	public MessageEmitter: Subject<MessageList> = new Subject();  
 
   	constructor(){}
   	
-	public throwError( E : ErrorList ){ 
+	public throwError( E : MessageList ){ 
 		E.tipus = E.CONST_DANGER;
-		this.ErrorEmitter.next( E );
+		this.MessageEmitter.next( E );
 	 }
-	public throwSuccess( E : ErrorList ){
+	public throwSuccess( E : MessageList ){
 		E.tipus = E.CONST_SUCCESS;
-		this.ErrorEmitter.next( E );
+		this.MessageEmitter.next( E );
 	}
 
 }
 
-export class ErrorList{
-	LlistatErrors: ErrorModel[] = [];
+export class MessageList{
+	LlistatMessages: MessageModel[] = [];
 	public tipus : number; 
 	public CONST_DANGER: number = 0;
 	public CONST_SUCCESS: number = 1;
 	public CONST_WARNING: number = 2;
 	
 	//Entra un objecte json 
-	constructor(json: string){
-		this.tipus = this.CONST_WARNING;
+	constructor( MM: any){
+		this.tipus = this.CONST_WARNING;				
+		if( MM instanceof String ){
+			MM = new Array<MessageModel>();			
+			MM.push(new MessageModel(0, <String>MM, MM.toString() ) );
+			console.log(MM.toString());
+		} else if ( MM instanceof Array ){
+			
+		}
+
+		
 	}
 }
 
-export class ErrorModel{
+export class MessageModel{
 
-	public id: number;
-	public text: string;
-	public description: string;	
+	public id: Number = 0;
+	public text: String = "";
+	public description: String = "";	
 
-	constructor(id:number, text: string, description: string){
+	constructor(id: Number, text: String, description: String){
 		this.id = id;
 		this.text = text; 
 		this.description = description;		
