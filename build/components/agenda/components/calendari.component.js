@@ -10,28 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var httpService_1 = require("../helpers/httpService");
-var AgendaComponent = (function () {
-    function AgendaComponent() {
+var CalendariComponent = (function () {
+    function CalendariComponent() {
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
     }
-    AgendaComponent.prototype.ngOnInit = function () {
+    CalendariComponent.prototype.ngOnInit = function () {
     };
-    return AgendaComponent;
+    return CalendariComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
-], AgendaComponent.prototype, "SiteID", void 0);
-AgendaComponent = __decorate([
+], CalendariComponent.prototype, "SiteID", void 0);
+CalendariComponent = __decorate([
     core_1.Component({
-        selector: 'agenda-component',
-        templateUrl: 'app/components/agenda/agenda.template.html',
-        providers: [httpService_1.HttpService]
+        selector: 'calendari',
+        templateUrl: 'app/components/agenda/templates/calendari.template.html',
+        providers: []
     }),
     __metadata("design:paramtypes", [])
-], AgendaComponent);
-exports.AgendaComponent = AgendaComponent;
+], CalendariComponent);
+exports.CalendariComponent = CalendariComponent;
 //# sourceMappingURL=agenda.component.js.map 
-//# sourceMappingURL=agenda.component.js.map
+//# sourceMappingURL=calendari.component.js.map

@@ -10,28 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var httpService_1 = require("../helpers/httpService");
-var AgendaComponent = (function () {
-    function AgendaComponent() {
-        //Entrem el SiteID per saber què carreguem
-        this.SiteID = 1;
+var LlistatComponent = (function () {
+    function LlistatComponent() {
+        var self = this;
     }
-    AgendaComponent.prototype.ngOnInit = function () {
+    LlistatComponent.prototype.setDisplayName = function (value) {
+        var self = this;
     };
-    return AgendaComponent;
+    LlistatComponent.prototype.setDisplayName2 = function (value) {
+        var self = this;
+    };
+    return LlistatComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], AgendaComponent.prototype, "SiteID", void 0);
-AgendaComponent = __decorate([
+LlistatComponent = __decorate([
     core_1.Component({
-        selector: 'agenda-component',
-        templateUrl: 'app/components/agenda/agenda.template.html',
-        providers: [httpService_1.HttpService]
+        selector: 'llistat',
+        templateUrl: 'app/components/agenda/templates/llistat.template.html'
     }),
     __metadata("design:paramtypes", [])
-], AgendaComponent);
-exports.AgendaComponent = AgendaComponent;
+], LlistatComponent);
+exports.LlistatComponent = LlistatComponent;
 //# sourceMappingURL=agenda.component.js.map 
-//# sourceMappingURL=agenda.component.js.map
+//# sourceMappingURL=llistat.component.js.map

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'llistat-component',
-    templateUrl: '../app/components/agenda/llistat.template.html'
+    selector: 'llistat',
+    templateUrl: 'app/components/agenda/templates/llistat.template.html'
 })
 export class LlistatComponent {
     constructor() {

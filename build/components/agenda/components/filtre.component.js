@@ -10,28 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var httpService_1 = require("../helpers/httpService");
-var AgendaComponent = (function () {
-    function AgendaComponent() {
+var FiltreAgendaComponent = (function () {
+    function FiltreAgendaComponent() {
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
     }
-    AgendaComponent.prototype.ngOnInit = function () {
+    FiltreAgendaComponent.prototype.ngOnInit = function () {
     };
-    return AgendaComponent;
+    return FiltreAgendaComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
-], AgendaComponent.prototype, "SiteID", void 0);
-AgendaComponent = __decorate([
+], FiltreAgendaComponent.prototype, "SiteID", void 0);
+FiltreAgendaComponent = __decorate([
     core_1.Component({
-        selector: 'agenda-component',
-        templateUrl: 'app/components/agenda/agenda.template.html',
-        providers: [httpService_1.HttpService]
+        selector: 'filtre',
+        templateUrl: 'app/components/agenda/templates/filtre.template.html',
+        providers: []
     }),
     __metadata("design:paramtypes", [])
-], AgendaComponent);
-exports.AgendaComponent = AgendaComponent;
+], FiltreAgendaComponent);
+exports.FiltreAgendaComponent = FiltreAgendaComponent;
 //# sourceMappingURL=agenda.component.js.map 
-//# sourceMappingURL=agenda.component.js.map
+//# sourceMappingURL=filtre.component.js.map

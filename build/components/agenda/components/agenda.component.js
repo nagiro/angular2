@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var httpService_1 = require("../helpers/httpService");
+var httpService_1 = require("../../helpers/httpService");
 var AgendaComponent = (function () {
     function AgendaComponent() {
         //Entrem el SiteID per saber què carreguem
@@ -27,7 +27,7 @@ __decorate([
 AgendaComponent = __decorate([
     core_1.Component({
         selector: 'agenda-component',
-        templateUrl: 'app/components/agenda/agenda.template.html',
+        templateUrl: 'app/components/agenda/templates/agenda.template.html',
         providers: [httpService_1.HttpService]
     }),
     __metadata("design:paramtypes", [])
