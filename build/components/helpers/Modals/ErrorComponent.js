@@ -10,25 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var LlistatComponent = (function () {
-    function LlistatComponent() {
-        var self = this;
+var AuxiliarObjects_1 = require("../../helpers/AuxiliarObjects");
+var ErrorComponent = (function () {
+    function ErrorComponent() {
+        //this.Error = new MessageEmitter();
     }
-    LlistatComponent.prototype.setDisplayName = function (value) {
-        var self = this;
+    ErrorComponent.prototype.ngOnInit = function () {
     };
-    LlistatComponent.prototype.setDisplayName2 = function (value) {
-        var self = this;
-    };
-    return LlistatComponent;
+    return ErrorComponent;
 }());
-LlistatComponent = __decorate([
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", AuxiliarObjects_1.MessageEmitter)
+], ErrorComponent.prototype, "Error", void 0);
+ErrorComponent = __decorate([
     core_1.Component({
-        selector: 'llistat-agenda',
-        templateUrl: 'app/components/agenda/templates/llistat.template.html'
+        selector: 'error-view',
+        template: '<modal-view [Missatge]="Error"></modal-view>',
+        providers: []
     }),
     __metadata("design:paramtypes", [])
-], LlistatComponent);
-exports.LlistatComponent = LlistatComponent;
+], ErrorComponent);
+exports.ErrorComponent = ErrorComponent;
 //# sourceMappingURL=agenda.component.js.map 
-//# sourceMappingURL=llistat.component.js.map
+//# sourceMappingURL=ErrorComponent.js.map

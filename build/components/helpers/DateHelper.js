@@ -4,18 +4,12 @@ var DateHelper = (function () {
     function DateHelper() {
     }
     DateHelper.prototype.getDate = function () { };
-    DateHelper.prototype.setDate = function () { };
+    DateHelper.prototype.setDate = function (dia) { this.date = dia; };
     DateHelper.prototype.getDateBDD = function () { };
     DateHelper.prototype.setDateBDD = function () { };
     return DateHelper;
 }());
 exports.DateHelper = DateHelper;
-var Date = (function () {
-    function Date() {
-    }
-    return Date;
-}());
-exports.Date = Date;
 var Time = (function () {
     function Time() {
     }

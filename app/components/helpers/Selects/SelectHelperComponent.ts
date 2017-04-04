@@ -26,7 +26,7 @@ export class SelectValue implements SelectHelperInterface{
 **/
 @Component({
   selector: 'single-select',
-  templateUrl: 'app/components/helpers/SingleSelectHelper.template.html'
+  templateUrl: 'app/components/helpers/Selects/SingleSelectHelper.template.html'
 })
 export class SelectHelperComponent {
   
@@ -80,7 +80,7 @@ export class SelectHelperComponent {
 **/
 @Component({
   selector: 'single-sino-select',
-  templateUrl: 'app/components/helpers/SingleSelectHelper.template.html'
+  templateUrl: 'app/components/helpers/Selects/SingleSelectHelper.template.html'
 })
 export class SiNoSelectHelper extends SelectHelperComponent {
 

@@ -3,10 +3,8 @@
 	  	<div class="container-fluid">  			
   			<div class="row"> <br /> </div>
   			<div class="row">  	  			
-  				<form  class="form-horizontal" (ngSubmit)="onSubmitActivitatGeneral()" #heroForm="ngForm">
-
-  				  <resposta-web-modal [E]="E" (showModal)="Missatge" ></resposta-web-modal>
-
+  				<form  class="form-horizontal" (ngSubmit)="onSubmitActivitatGeneral()" #heroForm="ngForm">  				  
+						<error-view [Error] = "Errors" ></error-view>
 				  <div class="form-group">
 				  	<div class="col-xs-2"> <label for="" class="control-label">Nom de l'activitat</label> </div>					  	
 				    <div class="col-xs-10">					    
@@ -90,3 +88,4 @@
   		</div>	    
 	  </tab>
 	</tabset>
+	<error-view [Error] = "Errors" ></error-view>

@@ -1,1 +1,58 @@
-Aquí hi va el filtre del template
+<div *ngFor="let item of MesosSelect">{{item.text}}</div>
+<error-view [Error] = "Errors" ></error-view>
+
+<form  class="form-horizontal" (ngSubmit)="onSubmitFiltra()" #filtreForm="ngForm">  				  
+
+    <div class="form-group">
+    <div class="col-xs-2"> <label for="" class="control-label">Text</label> </div>					  	
+    <div class="col-xs-10">					    
+        <input 	type="text" 
+                class="form-control" 					    							    
+                [value]="Text"
+                (input) = "setText($event.target.value)"
+        > 
+    </div>
+    </div>				  				  
+    <div class="form-group">					  
+    <div class="col-xs-2"> <label for="" class="control-label">Mes</label> </div>
+    <div class="col-xs-10"> 				    
+        <single-select 
+            (onChangeValue)="setMes($event)" 
+            [items]="MesosSelect" 
+            [placeholder]="'Escull un mes'"
+        ></single-select>
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="col-xs-2"> <label for="" class="control-label">Ordenació</label> </div>
+    <div class="col-xs-10"> 
+        <single-select 
+            (onChangeValue)="setOrdenacio($event)" 
+            [items]="OrdenacioSelect" 
+            [placeholder]="'Escull una ordenacio'">				    		
+        </single-select>
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="col-xs-2"> <label for="" class="control-label">Tags</label> </div>
+    <div class="col-xs-10"> 
+        <single-select 
+            (onChangeValue)="setTags($event)" 
+            [items]="TagsSelect"
+            [placeholder]="'Escull un tag'">				    		
+        </single-select> 
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="col-xs-2"> <label for="" class="control-label">Dia</label> </div>
+    <div class="col-xs-10"> 
+        <input 	type="text" 
+                class="form-control" 
+                [value]="Dia"
+                (input) = "setDia($event)"    			
+        > 
+    </div>
+    </div>
+    <button type="submit" class="btn btn-success">Guarda l'activitat</button>
+    <button type="button" class="btn btn-warning">Esborra l'activitat</button>
+</form>

@@ -13,8 +13,9 @@ var platform_browser_1 = require("@angular/platform-browser");
 var agenda_component_js_1 = require("./components/agenda.component.js");
 var ng2_bootstrap_1 = require("ng2-bootstrap");
 var ng2_select_1 = require("ng2-select");
-var SelectHelperComponent_1 = require("../helpers/SelectHelperComponent");
-var ModalHelperComponent_1 = require("../helpers/ModalHelperComponent");
+var SelectHelperComponent_1 = require("../helpers/Selects/SelectHelperComponent");
+var ErrorComponent_1 = require("../helpers/Modals/ErrorComponent");
+var ModalComponent_1 = require("../helpers/Modals/ModalComponent");
 var filtre_component_1 = require("./components/filtre.component");
 var calendari_component_1 = require("./components/calendari.component");
 var llistat_component_1 = require("./components/llistat.component");
@@ -30,11 +31,13 @@ AgendaModule = __decorate([
             agenda_component_js_1.AgendaComponent,
             SelectHelperComponent_1.SelectHelperComponent,
             SelectHelperComponent_1.SiNoSelectHelper,
-            ModalHelperComponent_1.ModalHelperComponent,
+            ErrorComponent_1.ErrorComponent,
             filtre_component_1.FiltreAgendaComponent,
             calendari_component_1.CalendariComponent,
             llistat_component_1.LlistatComponent,
-            edicio_component_1.EditaActivitatComponent
+            edicio_component_1.EditaActivitatComponent,
+            ModalComponent_1.ModalComponent,
+            ErrorComponent_1.ErrorComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,

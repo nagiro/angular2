@@ -1,15 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../helpers/httpService';
 import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 import { TipusModel, TipusSelectModel, TipusArray } from '../../models/Tipus.model';
-import { CiclesSelectModel, CiclesModel, CiclesArray } from '../../models/Cicles.model';
-import { ActivitatsSelectModel, ActivitatsModel, ActivitatsArray } from '../../models/Activitats.model';
-import { HorarisSelectModel, HorarisModel, HorarisArray } from '../../models/Horaris.model';
+import { CiclesModel } from '../../models/Cicles.model';
+import { ActivitatsModel } from '../../models/Activitats.model';
+import { HorarisModel } from '../../models/Horaris.model';
+import { SelectHelperInterface } from '../../helpers/Selects/SelectHelperComponent';
 
-import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/SelectHelperComponent';
-import { ModalHelperComponent } from '../../helpers/ModalHelperComponent';
-import { MessageEmitter, MessageList, MessageModel } from '../../helpers/AuxiliarObjects';
+import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/Selects/SelectHelperComponent';
+import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
+import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
 
 
 @Component({
@@ -28,11 +30,11 @@ export class EditaActivitatComponent implements OnInit {
     public Horaris: HorarisModel; 
 
     public Tabs: boolean[];
-    public E: MessageEmitter = new MessageEmitter();  
+    public Errors: MessageEmitter = new MessageEmitter();  
 
-    public CiclesSelect: CiclesSelectModel[];
-	public FormatsSelect: TipusSelectModel[];    
-    public EstatsSelect: TipusSelectModel[];    
+    CiclesSelect: SelectHelperInterface[];
+	public FormatsSelect: SelectHelperInterface[];    
+    public EstatsSelect: SelectHelperInterface[];    
 
     constructor( private http : HttpService ) {        		
         this.Tabs = [false, true, true];
@@ -48,15 +50,13 @@ export class EditaActivitatComponent implements OnInit {
     /**
     * Funció que retorna els cicles per a un select
     **/
-    public getCiclesToSelectFromServer(){        
+    public getCiclesToSelectFromServer(){                
     	let url = this.burl + '/agenda/getCicles'; 
-    	let parm = { idS: this.SiteID };
-        this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.getRes1(r), 
-            (r:Response) => this.E.throwError( new MessageList( <MessageModel[]> r.json() ) ) );
-    }
-    public getRes1(res: Response){        
-        this.CiclesSelect = new CiclesArray(res).getLlistatSelect();                
+    	let parm = { idS: this.SiteID, select: true };
+        let R = <Observable<SelectHelperInterface[]>> this.http.post( url, parm ).map( R => R.json() );
+        R.subscribe( 
+            ( R ) => this.CiclesSelect = R, 
+            ( R ) => this.Errors.throwErrorHttp( R ) );
     }    
 
     /**
@@ -66,8 +66,8 @@ export class EditaActivitatComponent implements OnInit {
     	let url = this.burl + '/agenda/getFormats'; 
     	let parm = { idS: this.SiteID, tipusNom: "form_act" };
     	this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.FormatsSelect = new TipusArray(r).getLlistatSelect(),
-            (r:Response) => this.E.throwError( new MessageList( <MessageModel[]> r.json() ) ) );
+            (r) => this.FormatsSelect = new TipusArray(r).getLlistatSelect(),
+            (r) => this.Errors.throwErrorHttp( r ) );
     }
 
 
@@ -80,8 +80,8 @@ export class EditaActivitatComponent implements OnInit {
         let parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
         
         this.http.post( url , parm ).subscribe( 
-            (r:Response) => this.E.throwSuccess(new MessageList( <MessageModel[]> r.json() ) ),
-            (r:Response) => this.E.throwError(new MessageList( <MessageModel[]> r.json() ) ));
+            (r) => r = r ,
+            (r) => this.Errors.throwErrorHttp( r ) );
     }
 
 }

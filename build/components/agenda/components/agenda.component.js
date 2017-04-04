@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var httpService_1 = require("../../helpers/httpService");
+var AuxiliarObjects_1 = require("../../helpers/AuxiliarObjects");
 var AgendaComponent = (function () {
     function AgendaComponent() {
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
+        this.Errors = new AuxiliarObjects_1.MessageEmitter();
     }
     AgendaComponent.prototype.ngOnInit = function () {
     };

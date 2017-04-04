@@ -1,17 +1,19 @@
 export class DateHelper {
-  date: Date;
-  time: Time;
+  public date: Date;
+  public any: number;
+  public mes: number;
+  public dia: number;    
 
-  constructor() {        
-    }
+  constructor() {}
 
-    public getDate(){}
-    public setDate(){}
-    public getDateBDD(){}
-    public setDateBDD(){}
+  public getDate(){  }
+  public setDate(dia: Date){ this.date = dia; }
+  public getDateBDD(){}
+  public setDateBDD(){}
 
 }
 
 
-export class Date {}
-export class Time{}
+export class Time {
+  
+}

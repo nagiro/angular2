@@ -3,13 +3,13 @@ import { HttpService } from '../../helpers/httpService';
 import { Response } from '@angular/http';
 
 import { TipusModel, TipusSelectModel, TipusArray } from '../../models/Tipus.model';
-import { CiclesSelectModel, CiclesModel, CiclesArray } from '../../models/Cicles.model';
+import { CiclesModel } from '../../models/Cicles.model';
 import { ActivitatsSelectModel, ActivitatsModel, ActivitatsArray } from '../../models/Activitats.model';
 import { HorarisSelectModel, HorarisModel, HorarisArray } from '../../models/Horaris.model';
 
-import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/SelectHelperComponent';
-import { ModalHelperComponent } from '../../helpers/ModalHelperComponent';
-import { MessageEmitter, MessageList, MessageModel } from '../../helpers/AuxiliarObjects';
+import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/Selects/SelectHelperComponent';
+import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
+import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class AgendaComponent implements OnInit {
 
 	//Entrem el SiteID per saber què carreguem
 	@Input() public SiteID: number = 1;
+
+    public Errors: MessageEmitter = new MessageEmitter();  
 	
     constructor() {}    
     

@@ -1,5 +1,5 @@
 import { KeyValueClass } from '../helpers/KeyValue';
-import { SelectHelperInterface } from '../helpers/SelectHelperComponent';
+import { SelectHelperInterface } from '../helpers/Selects/SelectHelperComponent';
 import { Response } from '@angular/http';
 
 export class TipusModel {

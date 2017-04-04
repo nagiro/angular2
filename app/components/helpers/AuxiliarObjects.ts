@@ -1,54 +1,46 @@
 import { Subject } from 'rxjs/Subject';
+import { Response } from '@angular/http';
 
 export class MessageEmitter {
 	
-	public MessageEmitter: Subject<MessageList> = new Subject();  
+	public MessageEmitter: Subject<MessageModel[]> = new Subject();  
 
   	constructor(){}
-  	
-	public throwError( E : MessageList ){ 
-		E.tipus = E.CONST_DANGER;
-		this.MessageEmitter.next( E );
-	 }
-	public throwSuccess( E : MessageList ){
-		E.tipus = E.CONST_SUCCESS;
-		this.MessageEmitter.next( E );
+  		
+
+	public throwErrorHttp( R: Response ){				
+		if( R.status == 400 ){			
+			let MEH = <MessageErrorHttp> R.json();			
+			let Missatges: MessageModel[] = [new MessageModel(MEH.code,MEH.message)];			
+			this.MessageEmitter.next( Missatges );
+		} else {
+			
+			let Missatges: MessageModel[] = [new MessageModel(R.status, R.toString())];						
+			this.MessageEmitter.next( Missatges );
+		}		
+		
+	}
+
+	public getSubject(){
+		return this.MessageEmitter;
 	}
 
 }
 
-export class MessageList{
-	LlistatMessages: MessageModel[] = [];
-	public tipus : number; 
-	public CONST_DANGER: number = 0;
-	public CONST_SUCCESS: number = 1;
-	public CONST_WARNING: number = 2;
-	
-	//Entra un objecte json 
-	constructor( MM: any){
-		this.tipus = this.CONST_WARNING;				
-		if( MM instanceof String ){
-			MM = new Array<MessageModel>();			
-			MM.push(new MessageModel(0, <String>MM, MM.toString() ) );
-			console.log(MM.toString());
-		} else if ( MM instanceof Array ){
-			
-		}
 
-		
-	}
+export interface MessageErrorHttp {
+	code: number;
+	message: String;
 }
 
 export class MessageModel{
 
 	public id: Number = 0;
-	public text: String = "";
-	public description: String = "";	
+	public text: String = "";	
 
-	constructor(id: Number, text: String, description: String){
+	constructor(id: Number, text: String){
 		this.id = id;
-		this.text = text; 
-		this.description = description;		
+		this.text = text; 		
 	}
 	
 }

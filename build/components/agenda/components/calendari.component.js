@@ -25,7 +25,7 @@ __decorate([
 ], CalendariComponent.prototype, "SiteID", void 0);
 CalendariComponent = __decorate([
     core_1.Component({
-        selector: 'calendari',
+        selector: 'calendari-agenda',
         templateUrl: 'app/components/agenda/templates/calendari.template.html',
         providers: []
     }),

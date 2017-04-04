@@ -8,14 +8,13 @@ import { AgendaComponent }     from './components/agenda.component.js';
 import { TooltipModule, TabsModule, ModalModule }       from 'ng2-bootstrap';
 
 import {SelectModule}          from 'ng2-select';
-import {SelectHelperComponent, SiNoSelectHelper } from '../helpers/SelectHelperComponent';
-import { ModalHelperComponent } from '../helpers/ModalHelperComponent';
+import {SelectHelperComponent, SiNoSelectHelper } from '../helpers/Selects/SelectHelperComponent';
+import { ErrorComponent } from '../helpers/Modals/ErrorComponent';
+import { ModalComponent } from '../helpers/Modals/ModalComponent';
 import { FiltreAgendaComponent } from './components/filtre.component';
 import { CalendariComponent } from './components/calendari.component';
 import { LlistatComponent } from './components/llistat.component';
 import { EditaActivitatComponent } from './components/edicio.component';
-
-
 
 
 
@@ -25,11 +24,13 @@ import { EditaActivitatComponent } from './components/edicio.component';
             AgendaComponent,
             SelectHelperComponent,
             SiNoSelectHelper,
-            ModalHelperComponent,
+            ErrorComponent,
             FiltreAgendaComponent,
             CalendariComponent,
             LlistatComponent,
-            EditaActivitatComponent
+            EditaActivitatComponent,
+            ModalComponent,
+            ErrorComponent
           ],
   imports:      [ 
   					BrowserModule,

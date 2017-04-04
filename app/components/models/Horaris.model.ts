@@ -1,7 +1,7 @@
 import { KeyValueClass } from '../helpers/KeyValue';
-import { DateHelper, Date, Time } from '../helpers/DateHelper';
+import { DateHelper, Time } from '../helpers/DateHelper';
 import { EspaisModel, EspaisExternsModel } from '../models/Espais.model';
-import { SelectHelperInterface } from '../helpers/SelectHelperComponent';
+import { SelectHelperInterface } from '../helpers/Selects/SelectHelperComponent';
 import { Response } from '@angular/http';
 
 export class HorarisModel {

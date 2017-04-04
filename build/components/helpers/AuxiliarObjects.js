@@ -5,44 +5,29 @@ var MessageEmitter = (function () {
     function MessageEmitter() {
         this.MessageEmitter = new Subject_1.Subject();
     }
-    MessageEmitter.prototype.throwError = function (E) {
-        E.tipus = E.CONST_DANGER;
-        this.MessageEmitter.next(E);
+    MessageEmitter.prototype.throwErrorHttp = function (R) {
+        if (R.status == 400) {
+            var MEH = R.json();
+            var Missatges = [new MessageModel(MEH.code, MEH.message)];
+            this.MessageEmitter.next(Missatges);
+        }
+        else {
+            var Missatges = [new MessageModel(R.status, R.toString())];
+            this.MessageEmitter.next(Missatges);
+        }
     };
-    MessageEmitter.prototype.throwSuccess = function (E) {
-        E.tipus = E.CONST_SUCCESS;
-        this.MessageEmitter.next(E);
+    MessageEmitter.prototype.getSubject = function () {
+        return this.MessageEmitter;
     };
     return MessageEmitter;
 }());
 exports.MessageEmitter = MessageEmitter;
-var MessageList = (function () {
-    //Entra un objecte json 
-    function MessageList(MM) {
-        this.LlistatMessages = [];
-        this.CONST_DANGER = 0;
-        this.CONST_SUCCESS = 1;
-        this.CONST_WARNING = 2;
-        this.tipus = this.CONST_WARNING;
-        if (MM instanceof String) {
-            MM = new Array();
-            MM.push(new MessageModel(0, MM, MM.toString()));
-            console.log(MM.toString());
-        }
-        else if (MM instanceof Array) {
-        }
-    }
-    return MessageList;
-}());
-exports.MessageList = MessageList;
 var MessageModel = (function () {
-    function MessageModel(id, text, description) {
+    function MessageModel(id, text) {
         this.id = 0;
         this.text = "";
-        this.description = "";
         this.id = id;
         this.text = text;
-        this.description = description;
     }
     return MessageModel;
 }());
