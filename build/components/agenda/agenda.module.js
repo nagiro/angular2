@@ -20,6 +20,7 @@ var filtre_component_1 = require("./components/filtre.component");
 var calendari_component_1 = require("./components/calendari.component");
 var llistat_component_1 = require("./components/llistat.component");
 var edicio_component_1 = require("./components/edicio.component");
+var angular2_text_mask_1 = require("angular2-text-mask");
 var AgendaModule = (function () {
     function AgendaModule() {
     }
@@ -46,7 +47,8 @@ AgendaModule = __decorate([
             ng2_bootstrap_1.TabsModule.forRoot(),
             ng2_bootstrap_1.ModalModule.forRoot(),
             ng2_select_1.SelectModule,
-            forms_1.FormsModule
+            forms_1.FormsModule,
+            angular2_text_mask_1.TextMaskModule
         ],
         providers: [],
         exports: [agenda_component_js_1.AgendaComponent],

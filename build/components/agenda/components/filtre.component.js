@@ -18,6 +18,7 @@ var FiltreAgendaComponent = (function () {
         this.http = http;
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
+        this.F = new FormulariAgenda();
         this.Text = "";
         this.MesosSelect = [];
         this.OrdenacioSelect = [new SelectModelClass_1.SelectModelClass(1, 'Data'), new SelectModelClass_1.SelectModelClass(2, 'Espais')];
@@ -27,6 +28,7 @@ var FiltreAgendaComponent = (function () {
     }
     FiltreAgendaComponent.prototype.ngOnInit = function () {
         this.getFilterInfoFromServer();
+        this.mascara = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     };
     /**
     * Funció que retorna els cicles per a un select
@@ -46,9 +48,13 @@ var FiltreAgendaComponent = (function () {
     };
     FiltreAgendaComponent.prototype.onSubmitFiltra = function () { };
     FiltreAgendaComponent.prototype.setText = function () { };
-    FiltreAgendaComponent.prototype.setMes = function () { };
+    FiltreAgendaComponent.prototype.setMes = function ($e) { console.log("He rebut el valor" + $e); console.log($e); };
     FiltreAgendaComponent.prototype.setOrdenacio = function () { };
-    FiltreAgendaComponent.prototype.setTags = function () { };
+    FiltreAgendaComponent.prototype.setTags = function ($e, $tipus) {
+        if ($tipus == 'data') {
+            this.F.TagsSelect = $e;
+        }
+    };
     FiltreAgendaComponent.prototype.setDia = function () { };
     return FiltreAgendaComponent;
 }());
@@ -65,4 +71,11 @@ FiltreAgendaComponent = __decorate([
     __metadata("design:paramtypes", [httpService_1.HttpService])
 ], FiltreAgendaComponent);
 exports.FiltreAgendaComponent = FiltreAgendaComponent;
+var FormulariAgenda = (function () {
+    function FormulariAgenda() {
+        this.Text = "";
+    }
+    return FormulariAgenda;
+}());
+exports.FormulariAgenda = FormulariAgenda;
 //# sourceMappingURL=filtre.component.js.map

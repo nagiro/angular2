@@ -7,14 +7,15 @@ import { AgendaComponent }     from './components/agenda.component.js';
 
 import { TooltipModule, TabsModule, ModalModule }       from 'ng2-bootstrap';
 
-import {SelectModule}          from 'ng2-select';
-import {SelectHelperComponent, SiNoSelectHelper } from '../helpers/Selects/SelectHelperComponent';
+import { SelectModule }          from 'ng2-select';
+import { SelectHelperComponent, SiNoSelectHelper } from '../helpers/Selects/SelectHelperComponent';
 import { ErrorComponent } from '../helpers/Modals/ErrorComponent';
 import { ModalComponent } from '../helpers/Modals/ModalComponent';
 import { FiltreAgendaComponent } from './components/filtre.component';
 import { CalendariComponent } from './components/calendari.component';
 import { LlistatComponent } from './components/llistat.component';
 import { EditaActivitatComponent } from './components/edicio.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 
 
@@ -39,7 +40,8 @@ import { EditaActivitatComponent } from './components/edicio.component';
   					TabsModule.forRoot(),
             ModalModule.forRoot(),
   					SelectModule,
-            FormsModule
+            FormsModule,
+            TextMaskModule            
   				],
   providers:    [ ],  
   exports:      [ AgendaComponent ],
