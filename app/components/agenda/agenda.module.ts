@@ -16,6 +16,8 @@ import { CalendariComponent } from './components/calendari.component';
 import { LlistatComponent } from './components/llistat.component';
 import { EditaActivitatComponent } from './components/edicio.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import {DpDatePickerModule} from 'ng2-date-picker';
+
 
 
 
@@ -25,7 +27,6 @@ import { TextMaskModule } from 'angular2-text-mask';
             AgendaComponent,
             SelectHelperComponent,
             SiNoSelectHelper,
-            ErrorComponent,
             FiltreAgendaComponent,
             CalendariComponent,
             LlistatComponent,
@@ -41,7 +42,8 @@ import { TextMaskModule } from 'angular2-text-mask';
             ModalModule.forRoot(),
   					SelectModule,
             FormsModule,
-            TextMaskModule            
+            TextMaskModule,
+            DpDatePickerModule            
   				],
   providers:    [ ],  
   exports:      [ AgendaComponent ],

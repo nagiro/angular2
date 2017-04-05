@@ -10,7 +10,6 @@ import { HorarisModel } from '../../models/Horaris.model';
 import { SelectHelperInterface } from '../../helpers/Selects/SelectHelperComponent';
 
 import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/Selects/SelectHelperComponent';
-import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
 import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
 
 

@@ -19,7 +19,8 @@
         '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
         '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
         'ng2-bootstrap': 'npm:ng2-bootstrap',        
-        'ng2-select': 'npm:ng2-select/bundles/ng2-select.umd.min.js',
+        'ng2-select': 'npm:ng2-select/bundles/ng2-select.umd.min.js',        
+
 
         // other libraries
         'rxjs':                       'npm:rxjs',
@@ -27,7 +28,9 @@
         'ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
         'ng2-select': 'npm:ng2-select/bundles/ng2-select.umd.min.js',
         'angular2-text-mask': 'npm:angular2-text-mask/dist/angular2TextMask.js',
-        'text-mask-core': 'npm:text-mask-core'        
+        'text-mask-core': 'npm:text-mask-core',
+        'ng2-date-picker': 'npm:ng2-date-picker',
+        'moment': 'npm:moment/min/moment.min.js'
     };
 
     //Dic què he de carregar... si per exemple tots els js o què?
@@ -35,7 +38,8 @@
             app:  { main: './main.js', defaultExtension: 'js' },
             rxjs: { defaultExtension: 'js' },
             'angular2-in-memory-web-api': { main: './index.js', defaultExtension: 'js' },
-            'text-mask-core': { defaultExtension: 'js' }            
+            'text-mask-core': { defaultExtension: 'js' } ,
+            'ng2-date-picker': { main: './bin/app/index.js', defaultExtension: 'js' }            
          };
 
     var config = {

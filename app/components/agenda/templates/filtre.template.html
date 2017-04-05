@@ -52,7 +52,7 @@
                     [value]="Dia"
                     (input) = "setDia($event)"    			
             > 
-        </div>
-        <multiple-date-picker></multiple-date-picker>
+        </div>  
+        <dp-day-picker name="selectedDate" [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-day-picker>
     </div>
 </form>
