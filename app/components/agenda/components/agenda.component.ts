@@ -10,24 +10,40 @@ import { HorarisSelectModel, HorarisModel, HorarisArray } from '../../models/Hor
 import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/Selects/SelectHelperComponent';
 import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
 import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
+import { MissatgesService } from '../../helpers/Missatges/Missatges.service';
+import { FormulariAgenda } from './filtre.component';
+
 
 
 @Component({
     selector: 'agenda-component',    
     templateUrl: 'app/components/agenda/templates/agenda.template.html',
-    providers: [HttpService]
+    providers: [MissatgesService, HttpService]
 })
 export class AgendaComponent implements OnInit {          
 
 	//Entrem el SiteID per saber què carreguem
 	@Input() public SiteID: number = 1;
 
-    public Errors: MessageEmitter = new MessageEmitter();  
+    public Missatges: MessageModel[] = [];      
+    private FormulariAgenda : FormulariAgenda;
+    private ActivitatID : number;    
 	
-    constructor() {}    
-    
-    ngOnInit(){
+    constructor(private http: HttpService, private _MS : MissatgesService) {
+        _MS.LlistatMissatgesSuccess.subscribe();
+        _MS.LlistatMissatgesError.subscribe();    
+        this.FormulariAgenda = new FormulariAgenda();
         
+    }    
+    
+    ngOnInit(){}
+
+    public updateData(F : FormulariAgenda){
+        this.FormulariAgenda = F;        
+    }
+
+    public editActivitat( id: number ){
+        this.ActivitatID = id;
     }
 
 }

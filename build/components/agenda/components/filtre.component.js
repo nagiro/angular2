@@ -13,9 +13,11 @@ var core_1 = require("@angular/core");
 var httpService_1 = require("../../helpers/httpService");
 var AuxiliarObjects_1 = require("../../helpers/AuxiliarObjects");
 var SelectModelClass_1 = require("../../helpers/Selects/SelectModelClass");
+var Missatges_service_1 = require("../../helpers/Missatges/Missatges.service");
 var FiltreAgendaComponent = (function () {
-    function FiltreAgendaComponent(http) {
+    function FiltreAgendaComponent(http, _MS) {
         this.http = http;
+        this._MS = _MS;
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
         this.F = new FormulariAgenda();
@@ -24,7 +26,17 @@ var FiltreAgendaComponent = (function () {
         this.OrdenacioSelect = [new SelectModelClass_1.SelectModelClass(1, 'Data'), new SelectModelClass_1.SelectModelClass(2, 'Espais')];
         this.TagsSelect = [];
         this.Errors = new AuxiliarObjects_1.MessageEmitter();
+        this.selectedData = new Date();
+        this.datePickerConfig = { firstDayOfWeek: "mo",
+            calendarsAmount: "1",
+            format: "DD/MM/YYYY",
+            allowMultiSelect: false,
+            weekdayNames: { su: 'dg', mo: 'dl', tu: 'dt', we: 'dc', th: 'dj', fr: 'dv', sa: 'ds' }
+        };
         this.burl = "http://www.casadecultura.eu/ajax";
+        _MS.LlistatMissatgesSuccess.subscribe();
+        _MS.LlistatMissatgesError.subscribe();
+        this.onFormulari = new core_1.EventEmitter();
     }
     FiltreAgendaComponent.prototype.ngOnInit = function () {
         this.getFilterInfoFromServer();
@@ -44,9 +56,12 @@ var FiltreAgendaComponent = (function () {
             _this.OrdenacioSelect = r.OrdenacioSelect;
             _this.TagsSelect = r.Tags;
             _this.Dia = r.Dia;
-        }, function (Resposta) { return _this.Errors.throwErrorHttp(Resposta); });
+        }, function (Resposta) { return _this._MS.addError("getFilterInfoFromServer", Resposta); });
     };
-    FiltreAgendaComponent.prototype.onSubmitFiltra = function () { };
+    //Quan cliquem el botó de filtra, carreguem les dades i les enviem
+    FiltreAgendaComponent.prototype.onSubmitFiltra = function () {
+        this.onFormulari.emit(this.F);
+    };
     FiltreAgendaComponent.prototype.setText = function () { };
     FiltreAgendaComponent.prototype.setMes = function ($e) { console.log("He rebut el valor" + $e); console.log($e); };
     FiltreAgendaComponent.prototype.setOrdenacio = function () { };
@@ -62,19 +77,31 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
 ], FiltreAgendaComponent.prototype, "SiteID", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], FiltreAgendaComponent.prototype, "onFormulari", void 0);
 FiltreAgendaComponent = __decorate([
     core_1.Component({
         selector: 'filtre-agenda',
         templateUrl: 'app/components/agenda/templates/filtre.template.html',
-        providers: [httpService_1.HttpService]
+        providers: []
     }),
-    __metadata("design:paramtypes", [httpService_1.HttpService])
+    __metadata("design:paramtypes", [httpService_1.HttpService, Missatges_service_1.MissatgesService])
 ], FiltreAgendaComponent);
 exports.FiltreAgendaComponent = FiltreAgendaComponent;
 var FormulariAgenda = (function () {
     function FormulariAgenda() {
         this.Text = "";
+        this.Text = "";
+        this.MesosSelect = 0;
+        this.OrdenacioSelect = 0;
+        this.TagsSelect = [];
+        this.Dia = "";
     }
+    FormulariAgenda.prototype.hasDia = function () {
+        return (this.Dia.length > 0);
+    };
     return FormulariAgenda;
 }());
 exports.FormulariAgenda = FormulariAgenda;

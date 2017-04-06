@@ -1,5 +1,6 @@
-<error-view [Error] = "Errors" ></error-view>
-<filtre-agenda></filtre-agenda>
-<calendari-agenda></calendari-agenda>
-<llistat-agenda></llistat-agenda>
-<edita-activitat></edita-activitat>
+<missatges-view></missatges-view>
+<filtre-agenda (onFormulari)="updateData($event)"></filtre-agenda>
+<calendari-agenda [Formulari] = "FormulariAgenda"></calendari-agenda>
+<llistat-agenda *ngIf="FormulariAgenda.hasDia()" (onActivitatClick) = "editActivitat($event)" [Formulari] = "FormulariAgenda"></llistat-agenda>
+<edita-activitat *ngIf="ActivitatID > 0" [ActivitatID] = "ActivitatID"></edita-activitat>
+{{FormulariAgenda.Dia}}

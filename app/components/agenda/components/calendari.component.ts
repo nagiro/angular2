@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormulariAgenda } from './filtre.component';
 
 @Component({
     selector: 'calendari-agenda',    
@@ -9,6 +10,7 @@ export class CalendariComponent implements OnInit {
 
 	//Entrem el SiteID per saber què carreguem
 	@Input() public SiteID: number = 1;
+    @Input() public Formulari : FormulariAgenda;
 	
     constructor() {}    
     

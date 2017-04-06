@@ -30,7 +30,8 @@
         'angular2-text-mask': 'npm:angular2-text-mask/dist/angular2TextMask.js',
         'text-mask-core': 'npm:text-mask-core',
         'ng2-date-picker': 'npm:ng2-date-picker',
-        'moment': 'npm:moment/min/moment.min.js'
+        'moment': 'npm:moment/min/moment.min.js',
+        'angular2-moment': 'npm:angular2-moment'
     };
 
     //Dic què he de carregar... si per exemple tots els js o què?
@@ -39,7 +40,8 @@
             rxjs: { defaultExtension: 'js' },
             'angular2-in-memory-web-api': { main: './index.js', defaultExtension: 'js' },
             'text-mask-core': { defaultExtension: 'js' } ,
-            'ng2-date-picker': { main: './bin/app/index.js', defaultExtension: 'js' }            
+            'ng2-date-picker': { main: './bin/app/index.js', defaultExtension: 'js' },
+            'angular2-moment': { main: './index.js', defaultExtension: 'js' },
          };
 
     var config = {

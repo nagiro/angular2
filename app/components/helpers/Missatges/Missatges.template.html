@@ -1,0 +1,10 @@
+<div *ngIf="MissatgesSuccess.length > 0" class="alert alert-success">
+    <div *ngFor="let m of MissatgesSuccess">
+        {{m.text}}
+    </div>  
+</div>
+<div *ngIf="MissatgesError.length > 0" class="alert alert-danger">
+    <div *ngFor="let m of MissatgesError">
+        {{m.text}} ({{m.id}})
+    </div>  
+</div>

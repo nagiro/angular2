@@ -16,7 +16,9 @@ import { CalendariComponent } from './components/calendari.component';
 import { LlistatComponent } from './components/llistat.component';
 import { EditaActivitatComponent } from './components/edicio.component';
 import { TextMaskModule } from 'angular2-text-mask';
-import {DpDatePickerModule} from 'ng2-date-picker';
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { MissatgesComponent } from '../helpers/Missatges/Missatges.component';
+import { MomentModule } from 'angular2-moment';
 
 
 
@@ -32,7 +34,8 @@ import {DpDatePickerModule} from 'ng2-date-picker';
             LlistatComponent,
             EditaActivitatComponent,
             ModalComponent,
-            ErrorComponent
+            ErrorComponent,
+            MissatgesComponent
           ],
   imports:      [ 
   					BrowserModule,
@@ -43,7 +46,8 @@ import {DpDatePickerModule} from 'ng2-date-picker';
   					SelectModule,
             FormsModule,
             TextMaskModule,
-            DpDatePickerModule            
+            DpDatePickerModule,
+            MomentModule
   				],
   providers:    [ ],  
   exports:      [ AgendaComponent ],

@@ -1,21 +1,26 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Injectable } from '@angular/core';
 import { HttpService } from '../../helpers/httpService';
 import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
 import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
 import { SelectModelClass } from '../../helpers/Selects/SelectModelClass';
 import { Observable } from 'rxjs/Observable';
+import { MissatgesService } from '../../helpers/Missatges/Missatges.service';
 
 
 @Component({
     selector: 'filtre-agenda',    
     templateUrl: 'app/components/agenda/templates/filtre.template.html',
-    providers: [HttpService]
+    providers: []
 })
 export class FiltreAgendaComponent implements OnInit {          
 
 	//Entrem el SiteID per saber què carreguem
 	@Input() public SiteID: number = 1;    
+    @Output() public onFormulari : EventEmitter<FormulariAgenda>;
+    
     public F : FormulariAgenda = new FormulariAgenda();
+    
+
     public Text: String = "";  
 	public MesosSelect: SelectModelClass[] = [];
 	public OrdenacioSelect: Array<SelectModelClass> = [new SelectModelClass(1,'Data'), new SelectModelClass(2,'Espais')];
@@ -23,14 +28,26 @@ export class FiltreAgendaComponent implements OnInit {
 	private Dia: Date;	
     public Errors: MessageEmitter = new MessageEmitter();  
     public mascara : Array<string | RegExp>;
+    public selectedData : Date = new Date();
+    
+    public datePickerConfig : Object = {    firstDayOfWeek: "mo", 
+                                            calendarsAmount: "1", 
+                                            format:"DD/MM/YYYY", 
+                                            allowMultiSelect: false, 
+                                            weekdayNames: {su: 'dg',mo: 'dl',tu: 'dt',we: 'dc',th: 'dj',fr: 'dv',sa: 'ds'}                                            
+                                        }; 
     
     private burl = "http://www.casadecultura.eu/ajax";        
 	
-    constructor(private http: HttpService) {}    
+    constructor(private http: HttpService, private _MS: MissatgesService) {
+        _MS.LlistatMissatgesSuccess.subscribe();
+        _MS.LlistatMissatgesError.subscribe();
+        this.onFormulari = new EventEmitter();
+    }    
     
     ngOnInit(){        
         this.getFilterInfoFromServer();
-        this.mascara =  ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+        this.mascara =  ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];        
     }
 
     /**
@@ -47,11 +64,15 @@ export class FiltreAgendaComponent implements OnInit {
                 this.OrdenacioSelect = <SelectModelClass[]> r.OrdenacioSelect;
                 this.TagsSelect = <SelectModelClass[]> r.Tags;
                 this.Dia = r.Dia;
-            },
-            (Resposta) => this.Errors.throwErrorHttp( Resposta ) );
+            },                    
+            (Resposta) => this._MS.addError("getFilterInfoFromServer", Resposta ) );
+
     }
 
-    public onSubmitFiltra(){}
+    //Quan cliquem el botó de filtra, carreguem les dades i les enviem
+    public onSubmitFiltra(){
+        this.onFormulari.emit(this.F);
+    }
     public setText(){}  
     public setMes($e : Number){ console.log("He rebut el valor" + $e); console.log($e); }
     public setOrdenacio(){}
@@ -79,6 +100,18 @@ export class FormulariAgenda {
 	public MesosSelect: Number;
 	public OrdenacioSelect: Number;
 	public TagsSelect: SelectModelClass[];
-	private Dia: String;	
+	private Dia: String;    
+
+    constructor(){
+        this.Text = "";
+        this.MesosSelect = 0;
+        this.OrdenacioSelect = 0;
+        this.TagsSelect = [];
+        this.Dia = "";
+    }
+
+    public hasDia(){
+        return (this.Dia.length > 0);
+    }
     
 }

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var filtre_component_1 = require("./filtre.component");
 var CalendariComponent = (function () {
     function CalendariComponent() {
         //Entrem el SiteID per saber què carreguem
@@ -23,6 +24,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
 ], CalendariComponent.prototype, "SiteID", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", filtre_component_1.FormulariAgenda)
+], CalendariComponent.prototype, "Formulari", void 0);
 CalendariComponent = __decorate([
     core_1.Component({
         selector: 'calendari-agenda',

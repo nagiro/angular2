@@ -22,6 +22,8 @@ var llistat_component_1 = require("./components/llistat.component");
 var edicio_component_1 = require("./components/edicio.component");
 var angular2_text_mask_1 = require("angular2-text-mask");
 var ng2_date_picker_1 = require("ng2-date-picker");
+var Missatges_component_1 = require("../helpers/Missatges/Missatges.component");
+var angular2_moment_1 = require("angular2-moment");
 var AgendaModule = (function () {
     function AgendaModule() {
     }
@@ -38,7 +40,8 @@ AgendaModule = __decorate([
             llistat_component_1.LlistatComponent,
             edicio_component_1.EditaActivitatComponent,
             ModalComponent_1.ModalComponent,
-            ErrorComponent_1.ErrorComponent
+            ErrorComponent_1.ErrorComponent,
+            Missatges_component_1.MissatgesComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,
@@ -49,7 +52,8 @@ AgendaModule = __decorate([
             ng2_select_1.SelectModule,
             forms_1.FormsModule,
             angular2_text_mask_1.TextMaskModule,
-            ng2_date_picker_1.DpDatePickerModule
+            ng2_date_picker_1.DpDatePickerModule,
+            angular2_moment_1.MomentModule
         ],
         providers: [],
         exports: [agenda_component_js_1.AgendaComponent],

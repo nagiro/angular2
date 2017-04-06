@@ -11,14 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var httpService_1 = require("../../helpers/httpService");
-var AuxiliarObjects_1 = require("../../helpers/AuxiliarObjects");
+var Missatges_service_1 = require("../../helpers/Missatges/Missatges.service");
+var filtre_component_1 = require("./filtre.component");
 var AgendaComponent = (function () {
-    function AgendaComponent() {
+    function AgendaComponent(http, _MS) {
+        this.http = http;
+        this._MS = _MS;
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
-        this.Errors = new AuxiliarObjects_1.MessageEmitter();
+        this.Missatges = [];
+        _MS.LlistatMissatgesSuccess.subscribe();
+        _MS.LlistatMissatgesError.subscribe();
+        this.FormulariAgenda = new filtre_component_1.FormulariAgenda();
     }
-    AgendaComponent.prototype.ngOnInit = function () {
+    AgendaComponent.prototype.ngOnInit = function () { };
+    AgendaComponent.prototype.updateData = function (F) {
+        this.FormulariAgenda = F;
+    };
+    AgendaComponent.prototype.editActivitat = function (id) {
+        this.ActivitatID = id;
     };
     return AgendaComponent;
 }());
@@ -30,9 +41,9 @@ AgendaComponent = __decorate([
     core_1.Component({
         selector: 'agenda-component',
         templateUrl: 'app/components/agenda/templates/agenda.template.html',
-        providers: [httpService_1.HttpService]
+        providers: [Missatges_service_1.MissatgesService, httpService_1.HttpService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [httpService_1.HttpService, Missatges_service_1.MissatgesService])
 ], AgendaComponent);
 exports.AgendaComponent = AgendaComponent;
 //# sourceMappingURL=agenda.component.js.map 

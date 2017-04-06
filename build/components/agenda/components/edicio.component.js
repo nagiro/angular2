@@ -14,9 +14,11 @@ var httpService_1 = require("../../helpers/httpService");
 var Tipus_model_1 = require("../../models/Tipus.model");
 var Activitats_model_1 = require("../../models/Activitats.model");
 var AuxiliarObjects_1 = require("../../helpers/AuxiliarObjects");
+var Missatges_service_1 = require("../../helpers/Missatges/Missatges.service");
 var EditaActivitatComponent = (function () {
-    function EditaActivitatComponent(http) {
+    function EditaActivitatComponent(http, _MS) {
         this.http = http;
+        this._MS = _MS;
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
         this.burl = "http://www.casadecultura.eu/ajax";
@@ -25,6 +27,8 @@ var EditaActivitatComponent = (function () {
         this.getCiclesToSelectFromServer();
         this.getFormatsToSelectFromServer();
         this.Activitat = new Activitats_model_1.ActivitatsModel();
+        _MS.LlistatMissatgesSuccess.subscribe();
+        _MS.LlistatMissatgesError.subscribe();
     }
     EditaActivitatComponent.prototype.ngOnInit = function () {
     };
@@ -36,7 +40,7 @@ var EditaActivitatComponent = (function () {
         var url = this.burl + '/agenda/getCicles';
         var parm = { idS: this.SiteID, select: true };
         var R = this.http.post(url, parm).map(function (R) { return R.json(); });
-        R.subscribe(function (R) { return _this.CiclesSelect = R; }, function (R) { return _this.Errors.throwErrorHttp(R); });
+        R.subscribe(function (R) { return _this.CiclesSelect = R; }, function (R) { return _this._MS.addError("getCiclesToSelectFromServer", R); });
     };
     /**
     * Funció que retorna els formats per a un select
@@ -45,7 +49,7 @@ var EditaActivitatComponent = (function () {
         var _this = this;
         var url = this.burl + '/agenda/getFormats';
         var parm = { idS: this.SiteID, tipusNom: "form_act" };
-        this.http.post(url, parm).subscribe(function (r) { return _this.FormatsSelect = new Tipus_model_1.TipusArray(r).getLlistatSelect(); }, function (r) { return _this.Errors.throwErrorHttp(r); });
+        this.http.post(url, parm).subscribe(function (R) { return _this.FormatsSelect = new Tipus_model_1.TipusArray(R).getLlistatSelect(); }, function (R) { return _this._MS.addError("getFormatsToSelectFromServer", R); });
     };
     /**
     * Guardem l'activitat en si
@@ -54,7 +58,7 @@ var EditaActivitatComponent = (function () {
         var _this = this;
         var url = this.burl + '/agenda/saveActivitat';
         var parm = { Activitat: this.Activitat, tipus: 1, idS: this.SiteID };
-        this.http.post(url, parm).subscribe(function (r) { return r = r; }, function (r) { return _this.Errors.throwErrorHttp(r); });
+        this.http.post(url, parm).subscribe(function (R) { return R = R; }, function (R) { return _this._MS.addError("onSubmitActivitatGeneral", R); });
     };
     return EditaActivitatComponent;
 }());
@@ -62,13 +66,17 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
 ], EditaActivitatComponent.prototype, "SiteID", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], EditaActivitatComponent.prototype, "ActivitatID", void 0);
 EditaActivitatComponent = __decorate([
     core_1.Component({
         selector: 'edita-activitat',
         templateUrl: 'app/components/agenda/templates/activitatEdit.template.html',
         providers: [httpService_1.HttpService]
     }),
-    __metadata("design:paramtypes", [httpService_1.HttpService])
+    __metadata("design:paramtypes", [httpService_1.HttpService, Missatges_service_1.MissatgesService])
 ], EditaActivitatComponent);
 exports.EditaActivitatComponent = EditaActivitatComponent;
 //# sourceMappingURL=agenda.component.js.map 

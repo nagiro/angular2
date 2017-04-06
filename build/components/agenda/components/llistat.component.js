@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var filtre_component_1 = require("./filtre.component");
 var LlistatComponent = (function () {
     function LlistatComponent() {
         var self = this;
@@ -22,6 +23,14 @@ var LlistatComponent = (function () {
     };
     return LlistatComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", filtre_component_1.FormulariAgenda)
+], LlistatComponent.prototype, "Formulari", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Number)
+], LlistatComponent.prototype, "onActivitatClick", void 0);
 LlistatComponent = __decorate([
     core_1.Component({
         selector: 'llistat-agenda',
