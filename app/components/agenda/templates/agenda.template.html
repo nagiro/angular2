@@ -3,4 +3,3 @@
 <calendari-agenda [Formulari] = "FormulariAgenda"></calendari-agenda>
 <llistat-agenda *ngIf="FormulariAgenda.hasDia()" (onActivitatClick) = "editActivitat($event)" [Formulari] = "FormulariAgenda"></llistat-agenda>
 <edita-activitat *ngIf="ActivitatID > 0" [ActivitatID] = "ActivitatID"></edita-activitat>
-{{FormulariAgenda.Dia}}

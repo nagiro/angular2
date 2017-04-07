@@ -11,12 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var filtre_component_1 = require("./filtre.component");
+var DateHelper_1 = require("../../helpers/DateHelper");
 var CalendariComponent = (function () {
     function CalendariComponent() {
         //Entrem el SiteID per saber què carreguem
         this.SiteID = 1;
+        this.DH = new DateHelper_1.DateHelper();
     }
     CalendariComponent.prototype.ngOnInit = function () {
+        //Carrego el llistat de dies dels tres propers mesos
+        this.Calendari = this.DH.getArrayWeeksAndDaysForPrintCalendar(3, 2017);
     };
     return CalendariComponent;
 }());

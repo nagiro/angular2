@@ -1,54 +1,62 @@
-<div *ngFor="let item of MesosSelect">{{item.text}}</div>
-<error-view [Error] = "Errors" ></error-view>
+<div class="panel panel-default">
 
-<form  class="form-horizontal" (ngSubmit)="onSubmitFiltra()" #filtreForm="ngForm">  				  
+  <div class="panel-heading">Cercador</div>
+  <div class="panel-body">
 
-    <div class="form-group">        
-        <div class="col-xs-2">
-            <label for="" class="control-label">Text</label>					    
-            <input 	type="text" 
-                    class="form-control"                
-                    [(ngModel)] = "F.Text"                
-                    name = "Text"
-                    [textMask] = "{mask: mascara }"
-                    required 
-                    #spy
-            > 
-            {{spy.className}}
-        </div>
-        <div class="col-xs-2">
-            <label for="" class="control-label">Mes</label>					    
-            <select [(ngModel)]="F.MesosSelect" name="MesosSelect" class="form-control">
-                <option *ngFor="let mesos of MesosSelect" [value]="mesos.id">{{mesos.text}}</option>
-            </select>    
-        </div>
-        <div class="col-xs-2">
-            <label for="" class="control-label">Ordenació</label>					    
-            <select [(ngModel)]="F.OrdenacioSelect" name="OrdenacioSelect" class="form-control">
-                <option *ngFor="let e of OrdenacioSelect" [value]="e.id">{{e.text}}</option>
-            </select>    
-        </div>
-        <div class="col-xs-2">
-            <label for="" class="control-label">Tags</label>					    
-            <ng-select    
-              [allowClear]="true"
-              [items]="TagsSelect"
-              [disabled]="disabled"
-              (data)="setTags($event, 'data')"
-              (selected)="setTags($event, 'selected')"
-              (removed)="setTags($event, 'removed')"
-              (typed)="setTags($event, 'typed')"
-              [placeholder]="placeholder"
-              [active]="defaultValue"              
-              [multiple]="true"
-              >
-            </ng-select>             
-        </div>
-    				  				  
-        <div class="col-xs-2" height="200px"> 
-            <label for="" class="control-label">Dia</label>
-            <dp-day-picker name="selectedDate" [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-day-picker>            
-        </div>                  
-        
+        <div *ngFor="let item of MesosSelect">{{item.text}}</div>
+        <error-view [Error] = "Errors" ></error-view>
+
+        <form  class="form-horizontal" (ngSubmit)="onSubmitFiltra()" #filtreForm="ngForm">  				  
+
+            <div class="form-group">        
+                <div class="col-xs-2">
+                    <label for="" class="control-label">Text</label>					    
+                    <input 	type="text" 
+                            class="form-control"                
+                            [(ngModel)] = "F.Text"                
+                            name = "Text"
+                            [textMask] = "{mask: mascara }"
+                            required 
+                            #spy
+                    > 
+                    {{spy.className}}
+                </div>
+                <div class="col-xs-2">
+                    <label for="" class="control-label">Mes</label>					    
+                    <select [(ngModel)]="F.MesosSelect" name="MesosSelect" class="form-control">
+                        <option *ngFor="let mesos of MesosSelect" [value]="mesos.id">{{mesos.text}}</option>
+                    </select>    
+                </div>
+                <div class="col-xs-2">
+                    <label for="" class="control-label">Ordenació</label>					    
+                    <select [(ngModel)]="F.OrdenacioSelect" name="OrdenacioSelect" class="form-control">
+                        <option *ngFor="let e of OrdenacioSelect" [value]="e.id">{{e.text}}</option>
+                    </select>    
+                </div>
+                <div class="col-xs-2">
+                    <label for="" class="control-label">Tags</label>					    
+                    <ng-select    
+                    [allowClear]="true"
+                    [items]="TagsSelect"
+                    [disabled]="disabled"
+                    (data)="setTags($event, 'data')"
+                    (selected)="setTags($event, 'selected')"
+                    (removed)="setTags($event, 'removed')"
+                    (typed)="setTags($event, 'typed')"
+                    [placeholder]="placeholder"
+                    [active]="defaultValue"              
+                    [multiple]="true"
+                    >
+                    </ng-select>             
+                </div>
+                                            
+                <div class="col-xs-2" height="200px"> 
+                    <label for="" class="control-label">Dia</label>
+                    <dp-day-picker name="selectedDate" [(ngModel)]="selectedDate" [config]="datePickerConfig"></dp-day-picker>            
+                </div>                  
+                
+            </div>
+        </form>
     </div>
-</form>
+
+</div>
