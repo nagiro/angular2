@@ -6,6 +6,7 @@ import { TipusModel, TipusSelectModel, TipusArray } from '../../models/Tipus.mod
 import { CiclesModel } from '../../models/Cicles.model';
 import { ActivitatsSelectModel, ActivitatsModel, ActivitatsArray } from '../../models/Activitats.model';
 import { HorarisSelectModel, HorarisModel, HorarisArray } from '../../models/Horaris.model';
+import { DadesCalendari } from './calendari.component';
 
 import { SelectHelperComponent, SiNoSelectHelper } from '../../helpers/Selects/SelectHelperComponent';
 import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
@@ -26,13 +27,16 @@ export class AgendaComponent implements OnInit {
 	@Input() public SiteID: number = 1;
 
     public Missatges: MessageModel[] = [];      
-    private FormulariAgenda : FormulariAgenda;
+    public DiaEscollit: DadesCalendari[];
+
+    private FormulariAgenda : FormulariAgenda;    
     private ActivitatID : number;    
 	
     constructor(private http: HttpService, private _MS : MissatgesService) {
         _MS.LlistatMissatgesSuccess.subscribe();
         _MS.LlistatMissatgesError.subscribe();    
         this.FormulariAgenda = new FormulariAgenda();
+        this.DiaEscollit = [];
         
     }    
     
@@ -40,6 +44,10 @@ export class AgendaComponent implements OnInit {
 
     public updateData(F : FormulariAgenda){
         this.FormulariAgenda = F;        
+    }
+
+    public onDiaEscollit( D: DadesCalendari[] ){        
+        this.DiaEscollit = D;               
     }
 
     public editActivitat( id: number ){

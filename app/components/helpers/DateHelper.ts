@@ -10,58 +10,48 @@ export class DateHelper {
   public setDate(dia: Date){ this.date = dia; }
   public getDateBDD(){}
   public setDateBDD(){}
-  public getArrayWeeksAndDaysForPrintCalendar(month: number, year: number, howManyMonths: number = 2) {
-    let date = new Date(year, month, 1);
-    let linies = { L1:[], L2:[], L3:[], L4:[], L5:[], L6:[] };        //Cada línia de la taula
-    let MesActual = date.getMonth();
-    let newDate = date;
-    let DiesInicialsMes = 0;
-
-    //Aquí carreguem on han d'anar els números de totes les línies
-    
-      while( howManyMonths > 0){        
-        while ( MesActual == date.getMonth() ) {
-          
-          //Mirem quin dia de la setmana és
-          let DiaDeLaSetmana = date.getDay();
-          if(DiaDeLaSetmana == 0) DiaDeLaSetmana = 7;
-
-          //Si és el primer dia del mes, deixem lliures tants espais com faci falta
-          if( date.getDate() == 1 ){
-            DiesInicialsMes = (DiaDeLaSetmana - 2);
-            for(let i = DiaDeLaSetmana; i>1; i-- ) linies.L1.push({dia:0,mes:date.getMonth()});
-          }
-          
-          let week = Math.floor( ( date.getDate() + DiesInicialsMes ) / 7 );  //Ens diu quina setmana és
-          
-          if( week == 0) { linies.L1.push( {dia: date.getDate(), mes:date.getMonth()} ); }
-          else if ( week == 1 ) { linies.L2.push( {dia: date.getDate(), mes:date.getMonth()} ); }
-          else if ( week == 2 ) { linies.L3.push( {dia: date.getDate(), mes:date.getMonth()} ); }
-          else if ( week == 3 ) { linies.L4.push( {dia: date.getDate() ,mes:date.getMonth()} ); }
-          else if ( week == 4 ) { linies.L5.push( {dia: date.getDate() ,mes:date.getMonth()} ); }
-          else if ( week == 5 ) { linies.L6.push( {dia: date.getDate(),mes:date.getMonth()} ); }
-          
-          newDate = new Date( date.getFullYear(), date.getMonth(), date.getDate() + 1 );                    
-          date = newDate;          
-
-        }
-        //Afegim una columna buida 
-        linies.L1.push({dia: -1, mes:date.getMonth()});
-        linies.L2.push({dia: -1, mes:date.getMonth()});
-        linies.L3.push({dia: -1, mes:date.getMonth()});
-        linies.L4.push({dia: -1, mes:date.getMonth()});
-        linies.L5.push({dia: -1, mes:date.getMonth()});
-        linies.L6.push({dia: -1, mes:date.getMonth()});
-        MesActual = date.getMonth();
-        howManyMonths = howManyMonths - 1;
-      }
-      
-      return linies;  
+  
+  public fromSelectMonthToDate( mmyyyy: number ): Date {
+    let D = new Date();
+    let Month = ( Math.floor( mmyyyy / 10000 ) );
+    let Year = ( ( mmyyyy / 10000 ) - Month ) * 10000;                
+    return new Date( Year, (Month - 1), 1);
   }
+
+  public convertDateToMysqlFormat(D : Date): String {
+    
+    let dd = D.getDate();
+    let mm = D.getMonth()+1; //January is 0!    
+    let yyyy = D.getFullYear();
+    let data : String; 
+
+    if(dd<10) data = data + '0' + dd ; 
+    if(mm<10) data = data + '/0' + mm ; 
+    
+    return  yyyy + '-' + ( ( (mm<10)?'0':'' ) + mm ) + '-' + ( ( (dd<10)?'0':'' ) + dd );    
+  }
+
 
 }
 
 
 export class Time {
   
+}
+
+export class iTime {
+  private H: string;
+  private M: string;
+  private S: string;
+
+  constructor(D: String){    
+    let A = D.split(":");
+    this.H = A[0];
+    this.M = A[1];
+    this.S = A[2];
+  }
+
+  public getShort() : String {    
+    return this.H + ":" + this.M;
+  }
 }

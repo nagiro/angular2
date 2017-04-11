@@ -1,5 +1,5 @@
 <missatges-view></missatges-view>
 <filtre-agenda (onFormulari)="updateData($event)"></filtre-agenda>
-<calendari-agenda [Formulari] = "FormulariAgenda"></calendari-agenda>
-<llistat-agenda *ngIf="FormulariAgenda.hasDia()" (onActivitatClick) = "editActivitat($event)" [Formulari] = "FormulariAgenda"></llistat-agenda>
+<calendari-agenda [Formulari] = "FormulariAgenda" (onDiaEscollit) = "onDiaEscollit($event)"></calendari-agenda>
+<llistat-agenda (onActivitatClick) = "editActivitat($event)" [LlistatActivitats] = "DiaEscollit"></llistat-agenda>
 <edita-activitat *ngIf="ActivitatID > 0" [ActivitatID] = "ActivitatID"></edita-activitat>

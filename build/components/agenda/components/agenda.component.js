@@ -23,10 +23,14 @@ var AgendaComponent = (function () {
         _MS.LlistatMissatgesSuccess.subscribe();
         _MS.LlistatMissatgesError.subscribe();
         this.FormulariAgenda = new filtre_component_1.FormulariAgenda();
+        this.DiaEscollit = [];
     }
     AgendaComponent.prototype.ngOnInit = function () { };
     AgendaComponent.prototype.updateData = function (F) {
         this.FormulariAgenda = F;
+    };
+    AgendaComponent.prototype.onDiaEscollit = function (D) {
+        this.DiaEscollit = D;
     };
     AgendaComponent.prototype.editActivitat = function (id) {
         this.ActivitatID = id;

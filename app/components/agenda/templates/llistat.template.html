@@ -1,0 +1,24 @@
+<div class="panel panel-default">    
+    <div class="panel-body">                
+
+        <div class="table-responsive">
+            <table class="table-striped" style="width:100%">
+                <tr>
+                    <td>Nom i responsable</td>
+                    <td>Inici</td>
+                    <td>Fi</td>
+                    <td>Espais</td>
+                </tr>
+                <tr *ngFor="let A of LlistatActivitats.DayData">
+                    <td style="font-weight:bold;">
+                        {{A.Nom}}<br>
+                        <span style="font-size:8px; color:gray;">(Responsable: {{A.Responsable}})</span>
+                    </td>                    
+                    <td>{{A.getHoraInici()}}</td>
+                    <td>{{A.HoraFi}}</td>
+                    <td>{{A.NomEspai}}</td>                    
+                </tr>
+            </table>    
+        </div>
+    </div>
+</div>

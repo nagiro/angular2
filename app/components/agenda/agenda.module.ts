@@ -1,11 +1,11 @@
 import { NgModule }            from '@angular/core';
-import { HttpModule }          from '@angular/http';
+import { HttpModule, Http }          from '@angular/http';
 import { FormsModule }         from '@angular/forms';
 
 import { BrowserModule }       from '@angular/platform-browser';
 import { AgendaComponent }     from './components/agenda.component.js';
 
-import { TooltipModule, TabsModule, ModalModule }       from 'ng2-bootstrap';
+import { TooltipModule, TabsModule, ModalModule, PopoverModule }       from 'ng2-bootstrap';
 
 import { SelectModule }          from 'ng2-select';
 import { SelectHelperComponent, SiNoSelectHelper } from '../helpers/Selects/SelectHelperComponent';
@@ -19,6 +19,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { MissatgesComponent } from '../helpers/Missatges/Missatges.component';
 import { MomentModule } from 'angular2-moment';
+import { PopoverCalendarComponent } from '../helpers/Modals/PopoverComponent';
 
 
 
@@ -35,7 +36,8 @@ import { MomentModule } from 'angular2-moment';
             EditaActivitatComponent,
             ModalComponent,
             ErrorComponent,
-            MissatgesComponent
+            MissatgesComponent,
+            PopoverCalendarComponent
           ],
   imports:      [ 
   					BrowserModule,
@@ -43,6 +45,7 @@ import { MomentModule } from 'angular2-moment';
   					TooltipModule.forRoot(),
   					TabsModule.forRoot(),
             ModalModule.forRoot(),
+            PopoverModule.forRoot(),
   					SelectModule,
             FormsModule,
             TextMaskModule,

@@ -85,7 +85,7 @@ FiltreAgendaComponent = __decorate([
     core_1.Component({
         selector: 'filtre-agenda',
         templateUrl: 'app/components/agenda/templates/filtre.template.html',
-        providers: []
+        providers: [httpService_1.HttpService]
     }),
     __metadata("design:paramtypes", [httpService_1.HttpService, Missatges_service_1.MissatgesService])
 ], FiltreAgendaComponent);
@@ -93,8 +93,9 @@ exports.FiltreAgendaComponent = FiltreAgendaComponent;
 var FormulariAgenda = (function () {
     function FormulariAgenda() {
         this.Text = "";
+        var avui = new Date();
         this.Text = "";
-        this.MesosSelect = 0;
+        this.MesosSelect = ((avui.getMonth() + 1) * 10000) + (avui.getFullYear() - 1); //Format MMYYYY
         this.OrdenacioSelect = 0;
         this.TagsSelect = [];
         this.Dia = "";

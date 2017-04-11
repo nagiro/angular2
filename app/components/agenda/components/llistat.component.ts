@@ -1,5 +1,5 @@
-import {Component, Input, Output} from '@angular/core';
-import { FormulariAgenda } from './filtre.component';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { DadesCalendari } from './calendari.component';
 
 @Component({
     selector: 'llistat-agenda',
@@ -7,11 +7,12 @@ import { FormulariAgenda } from './filtre.component';
 })
 export class LlistatComponent {
 
-    @Input() public Formulari : FormulariAgenda;
-    @Output() public onActivitatClick : number;
+    @Input() public LlistatActivitats : DadesCalendari[] ;
+    @Output() public onActivitatClick : EventEmitter<number>;
 
     constructor() {
         var self = this;
+        this.onActivitatClick = new EventEmitter();
         
     }
     setDisplayName(value: String){
@@ -19,8 +20,7 @@ export class LlistatComponent {
         
     }
     setDisplayName2(value: String){
-        var self = this;
-        
+        var self = this;        
     }
     
 }

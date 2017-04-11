@@ -1,0 +1,18 @@
+<template #popTemplate>
+    <table>
+        <tr *ngFor="let A of ActivitatsDia">
+            <td>{{A.Nom}}</td>
+            <td>{{A.Responsable}}</td>            
+            <td>{{A.HoraInici}}</td>
+            <td>{{A.HoraFi}}</td>
+            <td>{{A.NomEspai}}</td>
+        </tr>
+    </table>     
+</template>
+<button type="button" class="btn btn-warning" [popover]="popTemplate">
+  {{Dia}}
+</button>
+<style>
+    .popover-content { width:300px; }
+    .popover { max-width:300px;}
+</style>

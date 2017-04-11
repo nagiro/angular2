@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, Injectable } from '@angular/core';
 import { HttpService } from '../../helpers/httpService';
+
 import { ErrorComponent } from '../../helpers/Modals/ErrorComponent';
 import { MessageEmitter, MessageModel } from '../../helpers/AuxiliarObjects';
 import { SelectModelClass } from '../../helpers/Selects/SelectModelClass';
@@ -10,7 +11,7 @@ import { MissatgesService } from '../../helpers/Missatges/Missatges.service';
 @Component({
     selector: 'filtre-agenda',    
     templateUrl: 'app/components/agenda/templates/filtre.template.html',
-    providers: []
+    providers: [HttpService]
 })
 export class FiltreAgendaComponent implements OnInit {          
 
@@ -97,14 +98,15 @@ export interface FiltreAgendaModel {
 
 export class FormulariAgenda {
     public Text: String = "";  
-	public MesosSelect: Number;
-	public OrdenacioSelect: Number;
+	public MesosSelect: number;    
+	public OrdenacioSelect: number;
 	public TagsSelect: SelectModelClass[];
 	private Dia: String;    
 
     constructor(){
+        let avui = new Date();
         this.Text = "";
-        this.MesosSelect = 0;
+        this.MesosSelect = ((avui.getMonth()+1) * 10000 ) + (avui.getFullYear() - 1); //Format MMYYYY
         this.OrdenacioSelect = 0;
         this.TagsSelect = [];
         this.Dia = "";

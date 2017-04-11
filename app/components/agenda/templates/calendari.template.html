@@ -1,13 +1,41 @@
+<style>
+    .Normal { padding:10px; cursor: hand;  }
+    .CapDeSetmana { background-color: gray; padding:10px; cursor: hand; }
+    .bold { font-weight: bold; }
+</style>
+
+
+
 <div class="panel panel-default">    
-    <div class="panel-body">
-        <table>
-            <tr><td *ngFor="let dies of Calendari.L1">{{dies.dia}}</td></tr>
-            <tr><td *ngFor="let dies of Calendari.L2">{{dies.dia}}</td></tr>
-            <tr><td *ngFor="let dies of Calendari.L3">{{dies.dia}}</td></tr>
-            <tr><td *ngFor="let dies of Calendari.L4">{{dies.dia}}</td></tr>
-            <tr><td *ngFor="let dies of Calendari.L5">{{dies.dia}}</td></tr>
-            <tr><td *ngFor="let dies of Calendari.L6">{{dies.dia}}</td></tr>
-        </table>
+    <div class="panel-body">                
+        <div *ngFor="let mes of Calendari" class="col-xs-4">            
+            <table>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L1" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L2" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L3" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L4" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L5" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+                <tr><td class="{{Dia.class}}" *ngFor="let Dia of mes.L6" (click)="showDay(Dia)">
+                        <!-- <popover-view [Dia] = "Dia.dia" [ActivitatsDia] = "Dia.DayData"></popover-view> -->
+                        <div [class.bold]="Dia.DayData.length > 0"> {{Dia.dia}}</div>
+                </td></tr>
+            </table>
+        </div>
     </div>
 </div>
 

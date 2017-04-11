@@ -7,59 +7,22 @@ var DateHelper = (function () {
     DateHelper.prototype.setDate = function (dia) { this.date = dia; };
     DateHelper.prototype.getDateBDD = function () { };
     DateHelper.prototype.setDateBDD = function () { };
-    DateHelper.prototype.getArrayWeeksAndDaysForPrintCalendar = function (month, year, howManyMonths) {
-        if (howManyMonths === void 0) { howManyMonths = 2; }
-        var date = new Date(year, month, 1);
-        var linies = { L1: [], L2: [], L3: [], L4: [], L5: [], L6: [] }; //Cada línia de la taula
-        var MesActual = date.getMonth();
-        var newDate = date;
-        var DiesInicialsMes = 0;
-        //Aquí carreguem on han d'anar els números de totes les línies
-        while (howManyMonths > 0) {
-            while (MesActual == date.getMonth()) {
-                //Mirem quin dia de la setmana és
-                var DiaDeLaSetmana = date.getDay();
-                if (DiaDeLaSetmana == 0)
-                    DiaDeLaSetmana = 7;
-                //Si és el primer dia del mes, deixem lliures tants espais com faci falta
-                if (date.getDate() == 1) {
-                    DiesInicialsMes = (DiaDeLaSetmana - 2);
-                    for (var i = DiaDeLaSetmana; i > 1; i--)
-                        linies.L1.push({ dia: 0, mes: date.getMonth() });
-                }
-                var week = Math.floor((date.getDate() + DiesInicialsMes) / 7); //Ens diu quina setmana és
-                if (week == 0) {
-                    linies.L1.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                else if (week == 1) {
-                    linies.L2.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                else if (week == 2) {
-                    linies.L3.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                else if (week == 3) {
-                    linies.L4.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                else if (week == 4) {
-                    linies.L5.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                else if (week == 5) {
-                    linies.L6.push({ dia: date.getDate(), mes: date.getMonth() });
-                }
-                newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-                date = newDate;
-            }
-            //Afegim una columna buida 
-            linies.L1.push({ dia: -1, mes: date.getMonth() });
-            linies.L2.push({ dia: -1, mes: date.getMonth() });
-            linies.L3.push({ dia: -1, mes: date.getMonth() });
-            linies.L4.push({ dia: -1, mes: date.getMonth() });
-            linies.L5.push({ dia: -1, mes: date.getMonth() });
-            linies.L6.push({ dia: -1, mes: date.getMonth() });
-            MesActual = date.getMonth();
-            howManyMonths = howManyMonths - 1;
-        }
-        return linies;
+    DateHelper.prototype.fromSelectMonthToDate = function (mmyyyy) {
+        var D = new Date();
+        var Month = (Math.floor(mmyyyy / 10000));
+        var Year = ((mmyyyy / 10000) - Month) * 10000;
+        return new Date(Year, (Month - 1), 1);
+    };
+    DateHelper.prototype.convertDateToMysqlFormat = function (D) {
+        var dd = D.getDate();
+        var mm = D.getMonth() + 1; //January is 0!    
+        var yyyy = D.getFullYear();
+        var data;
+        if (dd < 10)
+            data = data + '0' + dd;
+        if (mm < 10)
+            data = data + '/0' + mm;
+        return yyyy + '-' + (((mm < 10) ? '0' : '') + mm) + '-' + (((dd < 10) ? '0' : '') + dd);
     };
     return DateHelper;
 }());
@@ -70,4 +33,17 @@ var Time = (function () {
     return Time;
 }());
 exports.Time = Time;
+var iTime = (function () {
+    function iTime(D) {
+        var A = D.split(":");
+        this.H = A[0];
+        this.M = A[1];
+        this.S = A[2];
+    }
+    iTime.prototype.getShort = function () {
+        return this.H + ":" + this.M;
+    };
+    return iTime;
+}());
+exports.iTime = iTime;
 //# sourceMappingURL=DateHelper.js.map

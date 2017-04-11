@@ -24,6 +24,7 @@ var angular2_text_mask_1 = require("angular2-text-mask");
 var ng2_date_picker_1 = require("ng2-date-picker");
 var Missatges_component_1 = require("../helpers/Missatges/Missatges.component");
 var angular2_moment_1 = require("angular2-moment");
+var PopoverComponent_1 = require("../helpers/Modals/PopoverComponent");
 var AgendaModule = (function () {
     function AgendaModule() {
     }
@@ -41,7 +42,8 @@ AgendaModule = __decorate([
             edicio_component_1.EditaActivitatComponent,
             ModalComponent_1.ModalComponent,
             ErrorComponent_1.ErrorComponent,
-            Missatges_component_1.MissatgesComponent
+            Missatges_component_1.MissatgesComponent,
+            PopoverComponent_1.PopoverCalendarComponent
         ],
         imports: [
             platform_browser_1.BrowserModule,
@@ -49,6 +51,7 @@ AgendaModule = __decorate([
             ng2_bootstrap_1.TooltipModule.forRoot(),
             ng2_bootstrap_1.TabsModule.forRoot(),
             ng2_bootstrap_1.ModalModule.forRoot(),
+            ng2_bootstrap_1.PopoverModule.forRoot(),
             ng2_select_1.SelectModule,
             forms_1.FormsModule,
             angular2_text_mask_1.TextMaskModule,

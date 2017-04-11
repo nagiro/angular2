@@ -10,34 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var LlistatComponent = (function () {
-    function LlistatComponent() {
-        var self = this;
-        this.onActivitatClick = new core_1.EventEmitter();
+var PopoverCalendarComponent = (function () {
+    function PopoverCalendarComponent() {
     }
-    LlistatComponent.prototype.setDisplayName = function (value) {
-        var self = this;
-    };
-    LlistatComponent.prototype.setDisplayName2 = function (value) {
-        var self = this;
-    };
-    return LlistatComponent;
+    PopoverCalendarComponent.prototype.ngOnInit = function () { };
+    PopoverCalendarComponent.prototype.ngOnDestroy = function () { };
+    return PopoverCalendarComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Array)
-], LlistatComponent.prototype, "LlistatActivitats", void 0);
+], PopoverCalendarComponent.prototype, "ActivitatsDia", void 0);
 __decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], LlistatComponent.prototype, "onActivitatClick", void 0);
-LlistatComponent = __decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], PopoverCalendarComponent.prototype, "Dia", void 0);
+PopoverCalendarComponent = __decorate([
     core_1.Component({
-        selector: 'llistat-agenda',
-        templateUrl: 'app/components/agenda/templates/llistat.template.html'
-    }),
-    __metadata("design:paramtypes", [])
-], LlistatComponent);
-exports.LlistatComponent = LlistatComponent;
-//# sourceMappingURL=agenda.component.js.map 
-//# sourceMappingURL=llistat.component.js.map
+        selector: 'popover-view',
+        templateUrl: 'app/components/helpers/Modals/PopoverComponent.template.html'
+    })
+], PopoverCalendarComponent);
+exports.PopoverCalendarComponent = PopoverCalendarComponent;
+//# sourceMappingURL=PopoverComponent.js.map
